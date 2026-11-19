@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
   "description": "Plataforma Inteligente de Acessibilidade Universal e Compatibilidade Pessoal",
   "scripts": {
     "start": "npm --prefix backend start",
