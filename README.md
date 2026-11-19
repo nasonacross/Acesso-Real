@@ -126,6 +126,38 @@ GEMINI_API_KEY=sua_chave_gemini_aqui
 
 ---
 
+## ⚡ Integração com Supabase (PostgreSQL na Nuvem)
+
+A plataforma conta com arquitetura dual-engine: funciona tanto com o banco transacional local em `backend/data/database.json` quanto com o **Supabase PostgreSQL**.
+
+Para ativar o Supabase:
+1. Acesse a pasta [`supabase/`](./supabase/README.md).
+2. Execute o script [`supabase/schema.sql`](./supabase/schema.sql) no SQL Editor do Supabase para criar as tabelas e políticas de segurança RLS.
+3. Execute o script [`supabase/seed.sql`](./supabase/seed.sql) para popular o banco com os 37 estabelecimentos cadastrados (Tupã, Bastos, Marília e SP), usuários e avaliações.
+4. Adicione suas credenciais no `.env`:
+   ```env
+   SUPABASE_URL=https://seu-projeto.supabase.co
+   SUPABASE_ANON_KEY=sua-chave-anon-publica
+   SUPABASE_SERVICE_ROLE_KEY=sua-chave-service-role
+   ```
+
+---
+
+## 🌐 Deploy no Vercel
+
+O projeto possui configuração pronta para deploy direto no **Vercel** (`vercel.json` e funções serverless em `api/`):
+
+1. Conecte o repositório GitHub (`nasonacross/Acesso-Real`) no painel do [Vercel](https://vercel.com/new).
+2. O Vercel detectará automaticamente a configuração do Vite e construirá o frontend (`frontend/dist`) e as rotas de API serverless.
+3. Nas configurações do projeto no Vercel (**Settings > Environment Variables**), adicione:
+   - `SUPABASE_URL`
+   - `SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `GEMINI_API_KEY` (opcional para IA Multimodal)
+4. Clique em **Deploy**!
+
+---
+
 ## 📱 Instalação PWA (Progressive Web App)
 
 - **Android / Google Chrome**: Toque no botão "Instalar App" na barra superior do AcessoReal ou acesse o menu de três pontos do navegador e selecione **"Instalar aplicativo"**.
