@@ -8,7 +8,6 @@
     "frontend": {
       "root": "frontend",
       "framework": "vite",
-      "installCommand": "rm -f package-lock.json ../package-lock.json && npm install --no-package-lock",
       "bindings": [
         {
           "type": "service",
