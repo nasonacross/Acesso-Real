@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "start": "tsx src/server.ts",
-    "build": "tsc && node -e \"const fs=require('fs'); fs.writeFileSync('dist/package.json', JSON.stringify({type:'module'})); fs.cpSync('data', 'dist/data', {recursive:true});\""
+    "build": "tsc --noEmit"
   },
   "dependencies": {
     "@google/genai": "^2.32.0",
