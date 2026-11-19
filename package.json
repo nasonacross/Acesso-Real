@@ -1,0 +1,31 @@
+{
+  "name": "acessoreal-platform",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "description": "Plataforma Inteligente de Acessibilidade Universal e Compatibilidade Pessoal",
+  "scripts": {
+    "start": "npm --prefix backend start",
+    "dev": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build && npm --prefix backend run build",
+    "build:frontend": "npm --prefix frontend run build",
+    "build:backend": "npm --prefix backend run build"
+  },
+  "keywords": [
+    "acessibilidade",
+    "pwa",
+    "inclusao",
+    "nbr9050",
+    "pcd",
+    "neurodiversidade",
+    "inteligencia-artificial",
+    "visao-computacional"
+  ],
+  "author": "AcessoReal",
+  "license": "MIT"
+}

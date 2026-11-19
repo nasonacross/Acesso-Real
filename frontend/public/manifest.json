@@ -1,0 +1,17 @@
+{
+  "short_name": "AcessoReal",
+  "name": "AcessoReal - Acessibilidade Universal",
+  "description": "Plataforma Inteligente de Acessibilidade Universal e Compatibilidade Pessoal",
+  "icons": [
+    {
+      "src": "/logo.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#f8fafc",
+  "theme_color": "#0284c7",
+  "display": "standalone",
+  "orientation": "portrait"
+}
