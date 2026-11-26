@@ -1,23 +1,41 @@
-import fs from 'fs';
 import { AIAnalysis } from './types.js';
 
+export interface OpticalMetrics {
+  width: number;
+  height: number;
+  brightness: number; // 0 to 100
+  contrast: number; // 0 to 100
+  glarePercent: number; // 0 to 100 (% of overexposed highlight pixels)
+}
+
+export interface AnalyzeImageInput {
+  imageBuffer: Buffer;
+  imageUrl: string;
+  mimeType?: string;
+  categoryHint?: AIAnalysis['category_analyzed'];
+  establishmentId?: string | null;
+  opticalMetrics?: OpticalMetrics;
+}
+
 export async function analyzeAccessibilityImage(
-  imagePath: string,
-  categoryHint: AIAnalysis['category_analyzed'] = 'entrada',
-  establishmentId: string | null = null
+  input: AnalyzeImageInput
 ): Promise<AIAnalysis> {
+  const {
+    imageBuffer,
+    imageUrl,
+    mimeType = 'image/jpeg',
+    categoryHint = 'entrada',
+    establishmentId = null,
+    opticalMetrics,
+  } = input;
   const apiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_API_KEY;
 
-  if (apiKey) {
+  if (apiKey && imageBuffer.length > 0) {
     try {
-      // Dynamic import of Google Gen AI SDK
       const { GoogleGenAI } = await import('@google/genai');
       const ai = new GoogleGenAI({ apiKey });
 
-      // Read image file as base64
-      const imageBuffer = fs.readFileSync(imagePath);
       const base64Image = imageBuffer.toString('base64');
-      const mimeType = imagePath.endsWith('.png') ? 'image/png' : 'image/jpeg';
 
       const prompt = `
 Você é o módulo de Visão Computacional do AcessoReal, uma plataforma de acessibilidade universal.
@@ -64,7 +82,7 @@ Responda ESTRITAMENTE em formato JSON com o seguinte schema:
       return {
         id: `ai_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
         establishment_id: establishmentId,
-        image_url: `/uploads/${imagePath.split(/[/\\]/).pop()}`,
+        image_url: imageUrl,
         category_analyzed: categoryHint,
         identified_items: parsed.identified_items || ['Estrutura visível identificada'],
         potential_barriers: parsed.potential_barriers || ['Nenhum obstáculo crítico evidente nesta tomada'],
@@ -77,20 +95,21 @@ Responda ESTRITAMENTE em formato JSON com o seguinte schema:
         created_at: new Date().toISOString(),
       };
     } catch (err) {
-      console.warn('Erro ao chamar Gemini API, usando motor heurístico local:', err);
+      console.warn('Erro ao chamar Gemini API, usando motor de visão computacional óptico local:', err);
     }
   }
 
-  // Fallback / Built-in Computer Vision Heuristic Engine
-  return generateHeuristicVisionAnalysis(imagePath, categoryHint, establishmentId);
+  return generateOpticalVisionAnalysis(imageUrl, imageBuffer.length, categoryHint, establishmentId, opticalMetrics);
 }
 
-function generateHeuristicVisionAnalysis(
-  imagePath: string,
+function generateOpticalVisionAnalysis(
+  imageUrl: string,
+  fileSizeBytes: number,
   category: AIAnalysis['category_analyzed'],
-  establishmentId: string | null
+  establishmentId: string | null,
+  metrics?: OpticalMetrics
 ): AIAnalysis {
-  const fileName = imagePath.split(/[/\\]/).pop() || '';
+  const fileSizeKb = Math.round(fileSizeBytes / 1024);
 
   const templates: Record<AIAnalysis['category_analyzed'], {
     items: string[];
@@ -102,183 +121,205 @@ function generateHeuristicVisionAnalysis(
   }> = {
     entrada: {
       items: [
-        'Vão de porta aparentemente amplo',
-        'Presença de maçaneta tipo alavanca',
-        'Área de aproximação frontal visível',
+        'Área de aproximação frontal e vão de entrada analisados',
+        'Estrutura de acesso principal identificada na tomada',
       ],
       barriers: [
-        'Indício de pequeno desnível/ressalto na soleira da porta',
-        'Porta manual de vidro sem faixa de sinalização visual aparente',
+        'Indício de possível ressalto ou desnível na soleira (requer medição presencial < 5mm)',
+        'Verificar sinalização visual de alto contraste em portas envidraçadas',
       ],
-      audiences: [
-        'Pessoas em cadeira de rodas',
-        'Pessoas com baixa visão',
-        'Pessoas com carrinho de bebê ou mobilidade reduzida',
-      ],
+      audiences: ['Pessoas em cadeira de rodas', 'Pessoas com baixa visão', 'Mobilidade reduzida'],
       recommendations: [
-        'Instalar fita sinalizadora de alto contraste na porta de vidro à altura dos olhos',
-        'Rebaixar ressalto da soleira para nivelamento total (< 5mm conforme NBR 9050)',
-        'Verificar se a força de abertura da porta não excede 23N',
-      ],
-      confidence: 85,
-      label: 'Média confiança',
-    },
-    rampa: {
-      items: [
-        'Rampa de acesso construída em alvenaria/concreto',
-        'Piso aparentemente uniforme',
-        'Guarda-corpo lateral presente em um dos lados',
-      ],
-      barriers: [
-        'Indício de inclinação que pode ser superior ao recomendado (requer medição in loco com inclinômetro)',
-        'Ausência aparente de corrimão duplo em ambos os lados',
-      ],
-      audiences: [
-        'Cadeirantes',
-        'Pessoas idosas ou com dificuldade de marcha',
-        'Usuários de muletas ou andadores',
-      ],
-      recommendations: [
-        'Instalar corrimão duplo em ambos os lados (alturas de 70cm e 92cm)',
-        'Medir a inclinação longitudinal da rampa para assegurar conformidade com a NBR 9050 (ideal até 8.33%)',
-        'Adicionar piso tátil de alerta no início e término da rampa',
-      ],
-      confidence: 78,
-      label: 'Indício preliminar (requer validação presencial)',
-    },
-    banheiro: {
-      items: [
-        'Bacia sanitária com caixa acoplada',
-        'Barra de apoio instalada na parede lateral',
-        'Torneira com acionamento por alavanca',
-      ],
-      barriers: [
-        'Área de transferência lateral pode estar reduzida pela proximidade da lixeira/armário',
-        'Ausência aparente de barra de apoio articulada no lado oposto à parede',
-      ],
-      audiences: [
-        'Cadeirantes',
-        'Pessoas com mobilidade reduzida severa',
-      ],
-      recommendations: [
-        'Garantir raio livre de giro de 1,50m e espaço de transferência lateral de no mínimo 80cm',
-        'Instalar botão de emergência sonoro/luminoso a 40cm do piso acabado',
-        'Fixar espelho com inclinação ou altura máxima de 90cm do solo',
+        'Garantir faixa sinalizadora de alto contraste em portas de vidro à altura dos olhos',
+        'Manter soleira totalmente nivelada (< 5mm conforme NBR 9050) e vão livre >= 80cm',
       ],
       confidence: 84,
       label: 'Média confiança',
     },
-    corredor: {
+    rampa: {
       items: [
-        'Corredor de circulação com iluminação artificial embutida',
-        'Piso cerâmico liso',
+        'Superfície inclinada de transição / rampa identificada',
+        'Análise visual de continuidade do piso e apoios laterais',
       ],
       barriers: [
-        'Possível presença de cartazes ou expositores temporários estreitando o vão livre',
-        'Reflexos de luz no piso que podem causar desorientação visual',
+        'Indício de inclinação que exige validação física com inclinômetro (limite NBR 9050: 8,33%)',
+        'Confirmar presença de corrimão duplo bilateral (alturas 70cm e 92cm)',
       ],
-      audiences: [
-        'Pessoas com baixa visão',
-        'Cadeirantes',
-        'Pessoas neurodivergentes com sensibilidade a reflexos luminosos',
-      ],
+      audiences: ['Cadeirantes', 'Idosos', 'Usuários de muletas ou andadores'],
       recommendations: [
-        'Garantir largura livre mínima de 1,20m desimpedida de qualquer mobiliário',
-        'Aplicar tratamento fosco ou antiderrapante para diminuir reflexos excessivos',
+        'Instalar corrimãos bilaterais em duas alturas e guia de balizamento',
+        'Adicionar piso tátil de alerta no início e término da rampa',
       ],
-      confidence: 80,
+      confidence: 79,
+      label: 'Indício preliminar (requer validação presencial)',
+    },
+    banheiro: {
+      items: [
+        'Ambiente sanitário e pontos de apoio analisados',
+        'Verificação visual de áreas de circulação e acessórios',
+      ],
+      barriers: [
+        'Confirmar área livre de transferência lateral (>= 80cm) e giro de 1,50m sem obstáculos',
+        'Verificar barras de apoio lateral e traseira e botão de alarme de emergência',
+      ],
+      audiences: ['Cadeirantes', 'Pessoas com mobilidade reduzida severa'],
+      recommendations: [
+        'Manter lixeiras e armários fora da área de transferência lateral da bacia',
+        'Instalar alarme sonoro/luminoso de emergência a 40cm do piso acabado',
+      ],
+      confidence: 82,
+      label: 'Média confiança',
+    },
+    corredor: {
+      items: [
+        'Corredor de circulação interna e revestimento de piso analisados',
+      ],
+      barriers: [
+        'Verificar se mobiliário ou expositores reduzem a largura livre mínima (1,20m)',
+      ],
+      audiences: ['Cadeirantes', 'Pessoas com baixa visão', 'Pessoas neurodivergentes'],
+      recommendations: [
+        'Garantir faixa livre contínua de pelo menos 1,20m desimpedida',
+        'Preferir revestimento fosco antiderrapante para conforto visual e motor',
+      ],
+      confidence: 81,
       label: 'Média confiança',
     },
     balcao: {
       items: [
-        'Balcão de atendimento principal',
+        'Área de atendimento / balcão principal analisada',
       ],
       barriers: [
-        'Altura do balcão aparentemente elevada (> 1 metro), sem rebaixo acessível identificado',
+        'Verificar se existe trecho rebaixado (75cm a 85cm) com vão livre inferior para aproximação frontal',
       ],
-      audiences: [
-        'Cadeirantes',
-        'Pessoas de baixa estatura / nanismo',
-      ],
+      audiences: ['Cadeirantes', 'Pessoas de baixa estatura'],
       recommendations: [
-        'Adaptar trecho do balcão com altura entre 75cm e 85cm e espaço livre inferior para aproximação frontal',
+        'Disponibilizar módulo de balcão rebaixado conforme NBR 9050 com atendimento prioritário sinalizado',
       ],
-      confidence: 88,
+      confidence: 85,
       label: 'Alta confiança',
     },
     calcada: {
       items: [
-        'Passeio público frontal',
+        'Passeio público e faixa de circulação externa analisados',
       ],
       barriers: [
-        'Indício de rachaduras ou remendos irregulares no piso da calçada',
-        'Guia sem rebaixamento suave para travessia',
+        'Verificar irregularidades, rachaduras ou obstáculos (postes/árvores) na faixa livre',
+        'Confirmar existência de rebaixamento de guia alinhado à travessia',
       ],
-      audiences: [
-        'Usuários de cadeira de rodas',
-        'Pessoas cegas ou com bengala de rastreamento',
-        'Pessoas com carrinhos de bebê',
-      ],
+      audiences: ['Cadeirantes', 'Pessoas cegas ou com bengala', 'Idosos'],
       recommendations: [
-        'Nivelar a faixa livre de circulação da calçada',
-        'Instalar rampa de calçada (rebaixo de meio-fio) alinhada à faixa de pedestres',
+        'Nivelar a faixa livre de circulação e implantar piso tátil direcional e de alerta',
+        'Garantir rebaixo de meio-fio com inclinação suave na esquina',
       ],
-      confidence: 75,
+      confidence: 78,
       label: 'Indício preliminar (requer validação presencial)',
     },
     sinalizacao: {
       items: [
-        'Placa indicativa de setor',
+        'Elemento de sinalização visual / placa informativa analisado',
       ],
       barriers: [
-        'Ausência visível de caracteres em relevo ou Braille',
-        'Fonte fina com contraste moderado contra o fundo',
+        'Verificar presença de texto em Braille / alto relevo e pictogramas simples',
       ],
-      audiences: [
-        'Pessoas cegas',
-        'Pessoas com baixa visão ou daltonismo',
-      ],
+      audiences: ['Pessoas cegas', 'Pessoas com baixa visão', 'Pessoas com deficiência intelectual'],
       recommendations: [
-        'Adicionar placa complementar com Braille e relevo táctil a 1,20m do chão',
-        'Aumentar o contraste cromático (relação mínima 4.5:1) e espessura das letras',
+        'Utilizar tipografia sem serifa, alto contraste (>= 4.5:1) e informações em Braille a 1,20m do piso',
       ],
       confidence: 86,
       label: 'Alta confiança',
     },
     ambiente: {
       items: [
-        'Salão de atendimento amplo com iluminação LED',
+        'Espaço coletivo e condições ambientais de iluminação analisados',
       ],
       barriers: [
-        'Ambiente com múltiplos pontos focais luminosos e sem tratamento acústico evidente',
+        'Avaliar conforto acústico e presença de estímulos visuais excessivos em horários de pico',
       ],
-      audiences: [
-        'Pessoas autistas (TEA)',
-        'Pessoas com TDAH ou sobrecarga sensorial',
-      ],
+      audiences: ['Pessoas autistas (TEA)', 'Pessoas com TDAH ou sobrecarga sensorial'],
       recommendations: [
-        'Criar cantos de descompressão ou assentos tranquilos longe de caixas de som',
-        'Adotar iluminação indireta dimerizável nos setores de espera',
+        'Oferecer assentos em zona de menor estímulo sonoro e iluminação indireta confortável',
       ],
-      confidence: 76,
-      label: 'Indício preliminar (requer validação presencial)',
+      confidence: 80,
+      label: 'Média confiança',
     },
   };
 
-  const selected = templates[category] || templates.entrada;
+  const base = templates[category] || templates.entrada;
+  const items = [...base.items];
+  const barriers = [...base.barriers];
+  const audiences = new Set<string>(base.audiences);
+  const recommendations = [...base.recommendations];
+  let confidence = base.confidence;
+
+  // Enrich with REAL optical diagnostics measured from the uploaded image pixels
+  if (metrics && metrics.width > 0 && metrics.height > 0) {
+    items.unshift(
+      `Imagem validada (${metrics.width}x${metrics.height}px • ${fileSizeKb} KB) — Luminosidade média: ${metrics.brightness}% | Contraste visual: ${metrics.contrast}%`
+    );
+
+    if (metrics.brightness < 32) {
+      barriers.unshift(
+        `Baixa iluminação detectada na fotografia (luminosidade ${metrics.brightness}%): ambiente escuro eleva risco de quedas e dificulta leitura de obstáculos`
+      );
+      audiences.add('Pessoas com baixa visão');
+      audiences.add('Idosos');
+      recommendations.unshift(
+        'Reforçar a iluminação uniforme do ambiente/percurso para melhorar segurança visual e percepção de desníveis'
+      );
+    } else if (metrics.brightness > 80 || metrics.glarePercent > 18) {
+      barriers.unshift(
+        `Excesso de brilho / pontos de ofuscamento detectados (${metrics.glarePercent}% de áreas superexpostas): reflexos intensos podem gerar desconforto sensorial e visual`
+      );
+      audiences.add('Pessoas autistas (TEA) / Hipersensibilidade visual');
+      audiences.add('Pessoas com baixa visão');
+      recommendations.unshift(
+        'Reduzir ofuscamento com iluminação indireta, películas antirreflexo ou piso fosco antiderrapante'
+      );
+    } else {
+      items.push(`Nível de iluminação aparente equilibrado (${metrics.brightness}%), sem superexposição crítica (${metrics.glarePercent}% reflexo)`);
+    }
+
+    if (metrics.contrast < 22) {
+      barriers.push(
+        `Baixo contraste cromático detectado na cena (${metrics.contrast}%): dificulta diferenciar pisos, degraus, paredes ou placas`
+      );
+      audiences.add('Pessoas com baixa visão ou daltonismo');
+      recommendations.push(
+        'Aplicar faixas sinalizadoras de alto contraste entre piso, degraus, batentes e placas informativas'
+      );
+    } else {
+      items.push(`Bom contraste visual detectado na tomada (${metrics.contrast}%)`);
+    }
+
+    if (metrics.width < 400 || metrics.height < 300) {
+      confidence = Math.max(60, confidence - 14);
+      barriers.push('Resolução baixa na fotografia enviada: recomenda-se enviar foto mais nítida em outro ângulo');
+    } else {
+      confidence = Math.min(93, confidence + 4);
+    }
+  }
+
+  const label: AIAnalysis['confidence_label'] =
+    confidence >= 85
+      ? 'Alta confiança'
+      : confidence >= 76
+      ? 'Média confiança'
+      : 'Indício preliminar (requer validação presencial)';
 
   return {
     id: `ai_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
     establishment_id: establishmentId,
-    image_url: `/uploads/${fileName}`,
+    image_url: imageUrl,
     category_analyzed: category,
-    identified_items: selected.items,
-    potential_barriers: selected.barriers,
-    affected_audience: selected.audiences,
-    recommended_improvements: selected.recommendations,
-    confidence_score: selected.confidence,
-    confidence_label: selected.label,
-    disclaimer: 'Esta análise é baseada em inteligência artificial e visão computacional apresentando INDÍCIOS VISUAIS preliminares. Não constitui medição física, laudo técnico de engenharia ou certificação oficial da NBR 9050.',
+    identified_items: items,
+    potential_barriers: barriers,
+    affected_audience: Array.from(audiences),
+    recommended_improvements: recommendations,
+    confidence_score: confidence,
+    confidence_label: label,
+    disclaimer:
+      'Análise gerada pelo motor de visão computacional óptica do AcessoReal (indícios visuais baseados em luminosidade, contraste, ofuscamento e diretrizes da NBR 9050). Não substitui medição presencial ou laudo técnico.',
     status: 'concluido',
     created_at: new Date().toISOString(),
   };

@@ -18,6 +18,95 @@ const DATA_DIR = fs.existsSync(path.resolve(__dirname, 'data/database.json'))
   : path.resolve(__dirname, '../data');
 const DB_FILE = path.join(DATA_DIR, 'database.json');
 
+export function createDefaultProfile(userId: string): UserProfile {
+  return {
+    user_id: userId,
+    physical: {
+      wheelchair: false,
+      crutches: false,
+      cane: false,
+      reduced_mobility: false,
+      stair_difficulty: false,
+      long_distance_difficulty: false,
+      needs_ramps_elevators: false,
+    },
+    intellectual: {
+      intellectual_disability: false,
+      complex_info_difficulty: false,
+      spatial_orientation_difficulty: false,
+      needs_simple_instructions: false,
+      needs_assistance_tasks: false,
+      dyslexia: false,
+      memory_dementia: false,
+      prefers_written_communication: false,
+    },
+    sensory: {
+      autism: false,
+      adhd: false,
+      down_syndrome: false,
+      social_interaction_difficulty: false,
+      noise_sensitivity: false,
+      light_sensitivity: false,
+      crowded_spaces_difficulty: false,
+      needs_quiet_spaces: false,
+      anxiety_disorder: false,
+      panic_disorder: false,
+      depression: false,
+      bipolar_disorder: false,
+      ocd: false,
+      ptsd: false,
+      tourette: false,
+      psychosocial_condition: false,
+      smell_sensitivity: false,
+    },
+    visual: {
+      blindness: false,
+      low_vision: false,
+      reading_difficulty: false,
+      needs_tactile_audio_signage: false,
+    },
+    auditory: {
+      deafness: false,
+      partial_hearing_loss: false,
+      needs_libras: false,
+      needs_visual_information: false,
+    },
+    other: {
+      temporary_mobility_issue: false,
+      needs_priority_service: false,
+      needs_companion: false,
+      custom_needs: '',
+    },
+    accompaniment: {
+      status: 'undecided',
+      companion_count: 1,
+      helps_mobility: false,
+      helps_communication: false,
+      helps_activities: false,
+      full_time_escort: false,
+    },
+    updated_at: new Date().toISOString(),
+  };
+}
+
+export function hydrateProfile(userId: string, existing?: Partial<UserProfile> | null): UserProfile {
+  const def = createDefaultProfile(userId);
+  if (!existing) return def;
+  return {
+    ...def,
+    ...existing,
+    user_id: userId,
+    physical: { ...def.physical, ...(existing.physical || {}) },
+    intellectual: { ...def.intellectual, ...(existing.intellectual || {}) },
+    sensory: { ...def.sensory, ...(existing.sensory || {}) },
+    visual: { ...def.visual, ...(existing.visual || {}) },
+    auditory: { ...def.auditory, ...(existing.auditory || {}) },
+    other: { ...def.other, ...(existing.other || {}) },
+    accompaniment: { ...def.accompaniment, ...(existing.accompaniment || {}) },
+    updated_at: existing.updated_at || def.updated_at,
+  };
+}
+
 interface Schema {
   users: User[];
   profiles: Record<string, UserProfile>;
@@ -42,11 +131,11 @@ class Database {
   }
 
   private init() {
-    if (!fs.existsSync(DATA_DIR)) {
+    if (!process.env.VERCEL && !fs.existsSync(DATA_DIR)) {
       try {
         fs.mkdirSync(DATA_DIR, { recursive: true });
-      } catch (err) {
-        // Silently ignore in read-only serverless environments
+      } catch (_err) {
+        // Ignore in read-only serverless filesystems
       }
     }
 
@@ -65,12 +154,13 @@ class Database {
   }
 
   public persist() {
+    if (process.env.VERCEL) return;
     try {
       const tempFile = `${DB_FILE}.tmp`;
       fs.writeFileSync(tempFile, JSON.stringify(this.data, null, 2), 'utf-8');
       fs.renameSync(tempFile, DB_FILE);
     } catch (err) {
-      // In read-only serverless filesystems (e.g. Vercel), disk writes are skipped; Supabase or memory is used.
+      console.error('Falha ao persistir banco de dados:', err);
     }
   }
 
@@ -176,10 +266,7 @@ class Database {
         lng: -46.633308,
         phone: '(11) 3244-8800',
         website: 'https://social.sp.gov.br/cras',
-        images: [
-          'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_cras_esperanca_sat.jpg'],
         provenance: 'presencial' as const,
         is_demo: false,
         verified_status: 'verificado' as const,
@@ -259,10 +346,7 @@ class Database {
         lng: -46.655881,
         phone: '(11) 3388-1000',
         website: 'https://supermercadocentral.com.br',
-        images: [
-          'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_supermercado_central_sat.jpg'],
         provenance: 'usuario' as const,
         is_demo: false,
         verified_status: 'parcial' as const,
@@ -345,10 +429,7 @@ class Database {
         lng: -46.67115,
         phone: '(11) 2661-0000',
         website: 'https://hospitalregional.sp.gov.br',
-        images: [
-          'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80',
-          'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/hospital_clinicas_facade.jpg', '/images/establishments/est_hospital_geral_inclusivo_sat.jpg'],
         provenance: 'documentada' as const,
         is_demo: false,
         verified_status: 'verificado' as const,
@@ -428,9 +509,7 @@ class Database {
         lng: -46.65345,
         phone: '(11) 3120-4550',
         website: 'https://farmaciasaudeja.com.br',
-        images: [
-          'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_farmacia_popular_sat.jpg'],
         provenance: 'ia' as const,
         is_demo: false,
         verified_status: 'parcial' as const,
@@ -514,9 +593,7 @@ class Database {
         lng: -46.64023,
         phone: '(11) 5084-2211',
         website: 'https://restaurantesaboreinclusao.com.br',
-        images: [
-          'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_restaurante_cidadao_sat.jpg'],
         provenance: 'declarada' as const,
         is_demo: false,
         verified_status: 'verificado' as const,
@@ -596,9 +673,7 @@ class Database {
         lng: -46.63412,
         phone: '(11) 3105-9922',
         website: 'https://social.sp.gov.br/creas',
-        images: [
-          'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_creas_central_sat.jpg'],
         provenance: 'presencial' as const,
         is_demo: false,
         verified_status: 'verificado' as const,
@@ -678,9 +753,7 @@ class Database {
         lng: -46.65089,
         phone: '(11) 3256-4122',
         website: 'https://bibliotecas.sp.gov.br/monteiro-lobato',
-        images: [
-          'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/est_biblioteca_monteiro_lobato.jpg', '/images/establishments/est_biblioteca_monteiro_lobato_sat.jpg'],
         provenance: 'presencial' as const,
         is_demo: false,
         verified_status: 'verificado' as const,
@@ -760,9 +833,7 @@ class Database {
         lng: -46.63390,
         phone: '(11) 3111-2000',
         website: 'https://sptrans.com.br',
-        images: [
-          'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
-        ],
+        images: ['/images/establishments/terminal_se_facade.jpg', '/images/establishments/est_terminal_acessivel_sat.jpg'],
         provenance: 'documentada' as const,
         is_demo: false,
         verified_status: 'parcial' as const,
@@ -876,9 +947,7 @@ class Database {
         barriers_reported: [
           'Caixas temporárias de reposição obstruindo trecho do corredor 4',
         ],
-        images: [
-          'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=600&q=80',
-        ],
+        images: ['/images/establishments/est_supermercado_central_sat.jpg'],
         provenance: 'presencial',
         status: 'aprovada',
         created_at: '2026-11-10T14:30:00Z',

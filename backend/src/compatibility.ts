@@ -101,11 +101,12 @@ export function calculatePersonalCompatibility(
     physicalScore = physTotal > 0 ? Math.round((physPoints / physTotal) * 100) : 100;
   }
 
-  // 2. INTELLECTUAL EVALUATION
+  // 2. INTELLECTUAL & COGNITIVE EVALUATION
   let intellectualScore: number | null = null;
   const intellectualSelected = i.intellectual_disability || i.complex_info_difficulty || 
                                i.spatial_orientation_difficulty || i.needs_simple_instructions || 
-                               i.needs_assistance_tasks;
+                               i.needs_assistance_tasks || i.dyslexia || i.memory_dementia ||
+                               i.prefers_written_communication;
 
   if (intellectualSelected) {
     let intPoints = 0;
@@ -135,6 +136,16 @@ export function calculatePersonalCompatibility(
       potential_difficulties.push('Espaço com layout confuso ou de difícil localização');
     }
 
+    if (i.prefers_written_communication) {
+      intTotal += 1;
+      if (f.text_service || f.alternative_communication) {
+        intPoints += 1;
+        strengths.push('Aceita atendimento escrito ou comunicação alternativa');
+      } else {
+        potential_difficulties.push('Atendimento predominantemente verbal sem alternativa escrita confirmada');
+      }
+    }
+
     if (f.allows_accompanied_service) {
       strengths.push('Permite e incentiva atendimento assistido com acompanhante');
     }
@@ -142,17 +153,19 @@ export function calculatePersonalCompatibility(
     intellectualScore = intTotal > 0 ? Math.round((intPoints / intTotal) * 100) : 100;
   }
 
-  // 3. SENSORY & PSYCHOSOCIAL EVALUATION
+  // 3. SENSORY, MENTAL HEALTH & PSYCHOSOCIAL EVALUATION
   let sensoryScore: number | null = null;
   const sensorySelected = s.autism || s.adhd || s.down_syndrome || s.social_interaction_difficulty ||
                           s.noise_sensitivity || s.light_sensitivity || s.crowded_spaces_difficulty ||
-                          s.needs_quiet_spaces;
+                          s.needs_quiet_spaces || s.anxiety_disorder || s.panic_disorder ||
+                          s.depression || s.bipolar_disorder || s.ocd || s.ptsd ||
+                          s.tourette || s.psychosocial_condition || s.smell_sensitivity;
 
   if (sensorySelected) {
     let senPoints = 0;
     let senTotal = 0;
 
-    if (s.noise_sensitivity) {
+    if (s.noise_sensitivity || s.ptsd || s.autism) {
       senTotal += 2;
       if (f.low_noise_level) {
         senPoints += 2;
@@ -172,19 +185,29 @@ export function calculatePersonalCompatibility(
       }
     }
 
-    if (s.needs_quiet_spaces || s.crowded_spaces_difficulty || s.autism) {
+    if (s.needs_quiet_spaces || s.crowded_spaces_difficulty || s.autism || s.panic_disorder || s.anxiety_disorder || s.ptsd || s.depression) {
       senTotal += 2;
       if (f.sensory_regulation_room || f.quiet_rest_space) {
         senPoints += 2;
-        strengths.push('Sala ou espaço calmo disponível para autorregulação sensorial');
+        strengths.push('Sala ou espaço calmo disponível para pausa e autorregulação emocional/sensorial');
       } else {
-        potential_difficulties.push('Não possui espaço reservado para descompressão sensorial');
+        potential_difficulties.push('Não possui espaço reservado para pausa ou descompressão');
       }
 
       senTotal += 1;
       if (f.crowd_level_indicated) {
         senPoints += 1;
         strengths.push('Informa horários de menor pico e movimentação');
+      }
+    }
+
+    if (s.anxiety_disorder || s.depression || s.bipolar_disorder || s.ocd || s.tourette || s.psychosocial_condition || s.social_interaction_difficulty) {
+      senTotal += 2;
+      if (f.respectful_non_discriminatory && f.flexible_service) {
+        senPoints += 2;
+        strengths.push('Atendimento acolhedor, flexível e livre de estigmas ou julgamentos');
+      } else {
+        potential_difficulties.push('Atendimento rígido ou sem confirmação de capacitação em saúde mental');
       }
     }
 

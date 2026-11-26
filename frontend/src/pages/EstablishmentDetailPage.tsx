@@ -16,7 +16,8 @@ import {
   Volume2,
   ArrowLeft,
   Building,
-  Flag
+  Flag,
+  Navigation
 } from 'lucide-react';
 import { Establishment, PersonalCompatibilityResult } from '../types';
 import { fetchEstablishmentById, calculateCompatibility } from '../api';
@@ -140,7 +141,7 @@ export const EstablishmentDetailPage: React.FC<Props> = ({ establishmentId, onNa
         {/* Photo Gallery Banner */}
         <div className="relative h-64 sm:h-80 bg-slate-900 overflow-hidden">
           <img
-            src={establishment.images[0] || 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80'}
+            src={establishment.images[0] || '/images/establishments/marilia_hcfamema.jpg'}
             alt={`Fotografia de ${establishment.name}`}
             className="w-full h-full object-cover opacity-90"
           />
@@ -174,7 +175,17 @@ export const EstablishmentDetailPage: React.FC<Props> = ({ establishmentId, onNa
             <span className="font-medium">{establishment.address} — {establishment.city}/{establishment.state}</span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            {establishment.id !== 'est_fadap_tupa' && (
+              <button
+                onClick={() => onNavigate('route', establishment.id)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-accent-500 hover:bg-accent-400 text-slate-950 font-extrabold text-xs shadow-sm transition-all"
+              >
+                <Navigation size={14} />
+                <span>Traçar Rota a partir da FADAP</span>
+              </button>
+            )}
+
             {establishment.phone && (
               <a
                 href={`tel:${establishment.phone}`}

@@ -19,45 +19,72 @@ import { AboutPage } from './pages/AboutPage';
 
 export const AppContent: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('home');
-  const [selectedEstablishmentId, setSelectedEstablishmentId] = useState<string>('est_cras_esperanca');
+  const [selectedEstablishmentId, setSelectedEstablishmentId] = useState<string>('est_fadap_tupa');
+  const [initialSearch, setInitialSearch] = useState<string>('');
+  const [initialCategory, setInitialCategory] = useState<string>('todos');
 
-  const handleNavigate = (tab: string, estId?: string) => {
+  const handleNavigate = (
+    tab: string,
+    estId?: string,
+    options?: { search?: string; category?: string }
+  ) => {
     if (estId) {
       setSelectedEstablishmentId(estId);
+    }
+    if (options?.search !== undefined) {
+      setInitialSearch(options.search);
+    } else if (tab !== 'establishments') {
+      setInitialSearch('');
+    }
+    if (options?.category !== undefined) {
+      setInitialCategory(options.category);
+    } else if (tab !== 'establishments') {
+      setInitialCategory('todos');
     }
     setActiveTab(tab);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 transition-colors">
-      <Navbar activeTab={activeTab} setActiveTab={setActiveTab} />
+    <div className="min-h-screen flex flex-col text-slate-900 transition-colors">
+      <Navbar activeTab={activeTab} setActiveTab={(tab) => handleNavigate(tab)} />
 
-      <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <main id="main-content" className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {activeTab === 'home' && <HomePage onNavigate={handleNavigate} />}
         {activeTab === 'map' && <MapPage onNavigate={handleNavigate} />}
-        {activeTab === 'establishments' && <EstablishmentsPage onNavigate={handleNavigate} />}
+        {activeTab === 'establishments' && (
+          <EstablishmentsPage
+            onNavigate={handleNavigate}
+            initialSearch={initialSearch}
+            initialCategory={initialCategory}
+          />
+        )}
         {activeTab === 'detail' && (
           <EstablishmentDetailPage
             establishmentId={selectedEstablishmentId}
             onNavigate={handleNavigate}
           />
         )}
-        {activeTab === 'profile' && <ProfilePage />}
+        {activeTab === 'profile' && <ProfilePage onNavigate={handleNavigate} />}
         {activeTab === 'simulation' && (
           <SimulationPage
             initialEstablishmentId={selectedEstablishmentId}
             onNavigate={handleNavigate}
           />
         )}
-        {activeTab === 'route' && <RoutePage />}
+        {activeTab === 'route' && (
+          <RoutePage
+            onNavigate={handleNavigate}
+            initialDestinationId={selectedEstablishmentId}
+          />
+        )}
         {activeTab === 'ai' && <AiVisionPage />}
         {activeTab === 'owner' && <OwnerPortalPage />}
         {activeTab === 'admin' && <AdminPage />}
         {activeTab === 'about' && <AboutPage />}
       </main>
 
-      <Footer onNavigate={handleNavigate} />
+      <Footer onNavigate={(tab) => handleNavigate(tab)} />
     </div>
   );
 };

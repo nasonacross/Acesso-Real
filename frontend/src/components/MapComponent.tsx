@@ -84,9 +84,9 @@ export const MapComponent: React.FC<Props> = ({
         iconAnchor: [12, 12],
       });
 
-      L.marker(userLocation, { icon: userIcon, title: 'Sua localização atual' })
+      L.marker(userLocation, { icon: userIcon, title: 'Localização Inicial: Faculdade FADAP (Tupã)' })
         .addTo(layer)
-        .bindPopup('<strong>📍 Sua localização atual</strong>');
+        .bindPopup('<strong>🎓 Localização Inicial: Faculdade FADAP / FAP (Tupã)</strong>');
 
       // Radius circle
       if (circleLayerRef.current) {

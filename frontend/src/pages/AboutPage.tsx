@@ -14,9 +14,9 @@ import {
 
 export const AboutPage: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16">
+    <div className="max-w-4xl mx-auto space-y-8 pb-16 animate-fade-in">
       {/* Header */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+      <div className="surface-card p-6 sm:p-8 space-y-4">
         <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 bg-brand-50 px-3 py-1 rounded-full uppercase tracking-wider">
           <FileText size={15} />
           <span>Metodologia & Transparência Técnica</span>
@@ -32,7 +32,7 @@ export const AboutPage: React.FC = () => {
       </div>
 
       {/* The 2 Fundamental Questions */}
-      <div className="bg-brand-900 text-white rounded-3xl p-6 sm:p-8 space-y-4 shadow-lg">
+      <div className="mesh-hero text-white rounded-[2rem] p-6 sm:p-8 space-y-4 shadow-elevated border border-white/10">
         <h2 className="text-xl font-extrabold tracking-tight">
           As Duas Perguntas Fundamentais do AcessoReal
         </h2>

@@ -23,6 +23,30 @@
       "role": "visitor",
       "password_hash": "mariana123",
       "created_at": "2026-11-18T22:25:00.629Z"
+    },
+    {
+      "id": "usr_1795111021476_xhc5",
+      "name": "Lucas Teste Tupã",
+      "email": "teste_1795111021417@tupa.sp.br",
+      "role": "visitor",
+      "password_hash": "1234",
+      "created_at": "2026-11-19T17:57:01.476Z"
+    },
+    {
+      "id": "usr_1795111128818_mo7d",
+      "name": "Ana Paula Silva",
+      "email": "seuemail@exemplo.com",
+      "role": "visitor",
+      "password_hash": "123456789",
+      "created_at": "2026-11-19T17:58:48.818Z"
+    },
+    {
+      "id": "usr_1795111451149_r2wt",
+      "name": "Maria Clara",
+      "email": "mental_1795111450476@tupa.sp.br",
+      "role": "visitor",
+      "password_hash": "1234",
+      "created_at": "2026-11-19T18:04:11.149Z"
     }
   ],
   "profiles": {
@@ -80,7 +104,7 @@
         "helps_activities": false,
         "full_time_escort": false
       },
-      "updated_at": "2026-11-18T22:25:00.630Z"
+      "updated_at": "2026-11-19T17:36:59.454Z"
     },
     "usr_gestor": {
       "user_id": "usr_gestor",
@@ -193,6 +217,236 @@
         "full_time_escort": false
       },
       "updated_at": "2026-11-18T23:28:01.089Z"
+    },
+    "usr_mariana": {
+      "user_id": "usr_mariana",
+      "physical": {
+        "wheelchair": false,
+        "crutches": false,
+        "cane": false,
+        "reduced_mobility": false,
+        "stair_difficulty": false,
+        "long_distance_difficulty": false,
+        "needs_ramps_elevators": false
+      },
+      "intellectual": {
+        "intellectual_disability": false,
+        "complex_info_difficulty": false,
+        "spatial_orientation_difficulty": false,
+        "needs_simple_instructions": false,
+        "needs_assistance_tasks": false
+      },
+      "sensory": {
+        "autism": false,
+        "adhd": false,
+        "down_syndrome": false,
+        "social_interaction_difficulty": false,
+        "noise_sensitivity": false,
+        "light_sensitivity": false,
+        "crowded_spaces_difficulty": false,
+        "needs_quiet_spaces": false
+      },
+      "visual": {
+        "blindness": false,
+        "low_vision": false,
+        "reading_difficulty": false,
+        "needs_tactile_audio_signage": false
+      },
+      "auditory": {
+        "deafness": false,
+        "partial_hearing_loss": false,
+        "needs_libras": false,
+        "needs_visual_information": false
+      },
+      "other": {
+        "temporary_mobility_issue": false,
+        "needs_priority_service": false,
+        "needs_companion": false,
+        "custom_needs": ""
+      },
+      "accompaniment": {
+        "status": "undecided",
+        "companion_count": 0,
+        "helps_mobility": false,
+        "helps_communication": false,
+        "helps_activities": false,
+        "full_time_escort": false
+      },
+      "updated_at": "2026-11-19T17:14:47.165Z"
+    },
+    "usr_1795111021476_xhc5": {
+      "user_id": "usr_1795111021476_xhc5",
+      "physical": {
+        "wheelchair": true,
+        "crutches": false,
+        "cane": false,
+        "reduced_mobility": false,
+        "stair_difficulty": true,
+        "long_distance_difficulty": false,
+        "needs_ramps_elevators": true
+      },
+      "intellectual": {
+        "intellectual_disability": false,
+        "complex_info_difficulty": false,
+        "spatial_orientation_difficulty": false,
+        "needs_simple_instructions": false,
+        "needs_assistance_tasks": false
+      },
+      "sensory": {
+        "autism": true,
+        "adhd": false,
+        "down_syndrome": false,
+        "social_interaction_difficulty": false,
+        "noise_sensitivity": true,
+        "light_sensitivity": false,
+        "crowded_spaces_difficulty": false,
+        "needs_quiet_spaces": false
+      },
+      "visual": {
+        "blindness": false,
+        "low_vision": false,
+        "reading_difficulty": false,
+        "needs_tactile_audio_signage": false
+      },
+      "auditory": {
+        "deafness": false,
+        "partial_hearing_loss": false,
+        "needs_libras": false,
+        "needs_visual_information": false
+      },
+      "other": {
+        "temporary_mobility_issue": false,
+        "needs_priority_service": false,
+        "needs_companion": false,
+        "custom_needs": ""
+      },
+      "accompaniment": {
+        "status": "undecided",
+        "companion_count": 0,
+        "helps_mobility": false,
+        "helps_communication": false,
+        "helps_activities": false,
+        "full_time_escort": false
+      },
+      "updated_at": "2026-11-19T17:57:01.482Z"
+    },
+    "usr_1795111128818_mo7d": {
+      "user_id": "usr_1795111128818_mo7d",
+      "physical": {
+        "wheelchair": false,
+        "crutches": false,
+        "cane": false,
+        "reduced_mobility": false,
+        "stair_difficulty": false,
+        "long_distance_difficulty": false,
+        "needs_ramps_elevators": false
+      },
+      "intellectual": {
+        "intellectual_disability": false,
+        "complex_info_difficulty": false,
+        "spatial_orientation_difficulty": false,
+        "needs_simple_instructions": false,
+        "needs_assistance_tasks": false
+      },
+      "sensory": {
+        "autism": false,
+        "adhd": false,
+        "down_syndrome": false,
+        "social_interaction_difficulty": false,
+        "noise_sensitivity": false,
+        "light_sensitivity": false,
+        "crowded_spaces_difficulty": false,
+        "needs_quiet_spaces": false
+      },
+      "visual": {
+        "blindness": false,
+        "low_vision": false,
+        "reading_difficulty": false,
+        "needs_tactile_audio_signage": false
+      },
+      "auditory": {
+        "deafness": false,
+        "partial_hearing_loss": false,
+        "needs_libras": false,
+        "needs_visual_information": false
+      },
+      "other": {
+        "temporary_mobility_issue": false,
+        "needs_priority_service": false,
+        "needs_companion": false,
+        "custom_needs": ""
+      },
+      "accompaniment": {
+        "status": "accompanied",
+        "companion_count": 1,
+        "helps_mobility": false,
+        "helps_communication": false,
+        "helps_activities": false,
+        "full_time_escort": false
+      },
+      "updated_at": "2026-11-19T18:06:15.283Z"
+    },
+    "usr_1795111451149_r2wt": {
+      "user_id": "usr_1795111451149_r2wt",
+      "physical": {
+        "wheelchair": false,
+        "crutches": false,
+        "cane": false,
+        "reduced_mobility": false,
+        "stair_difficulty": false,
+        "long_distance_difficulty": false,
+        "needs_ramps_elevators": false
+      },
+      "intellectual": {
+        "intellectual_disability": false,
+        "complex_info_difficulty": false,
+        "spatial_orientation_difficulty": false,
+        "needs_simple_instructions": false,
+        "needs_assistance_tasks": false,
+        "dyslexia": true,
+        "prefers_written_communication": true
+      },
+      "sensory": {
+        "autism": false,
+        "adhd": false,
+        "down_syndrome": false,
+        "social_interaction_difficulty": false,
+        "noise_sensitivity": false,
+        "light_sensitivity": false,
+        "crowded_spaces_difficulty": false,
+        "needs_quiet_spaces": false,
+        "anxiety_disorder": true,
+        "panic_disorder": true,
+        "ptsd": true,
+        "smell_sensitivity": true
+      },
+      "visual": {
+        "blindness": false,
+        "low_vision": false,
+        "reading_difficulty": false,
+        "needs_tactile_audio_signage": false
+      },
+      "auditory": {
+        "deafness": false,
+        "partial_hearing_loss": false,
+        "needs_libras": false,
+        "needs_visual_information": false
+      },
+      "other": {
+        "temporary_mobility_issue": false,
+        "needs_priority_service": false,
+        "needs_companion": false,
+        "custom_needs": ""
+      },
+      "accompaniment": {
+        "status": "undecided",
+        "companion_count": 0,
+        "helps_mobility": false,
+        "helps_communication": false,
+        "helps_activities": false,
+        "full_time_escort": false
+      },
+      "updated_at": "2026-11-19T18:04:11.155Z"
     }
   },
   "establishments": [
@@ -281,9 +535,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 93,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_supermercado_central",
@@ -373,9 +625,7 @@
       "auditory_score": 60,
       "service_score": 86,
       "overall_score": 62,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_hospital_geral_inclusivo",
@@ -461,9 +711,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 100,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_farmacia_popular",
@@ -554,9 +802,7 @@
       "auditory_score": 20,
       "service_score": 100,
       "overall_score": 49,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_restaurante_cidadao",
@@ -643,9 +889,7 @@
       "auditory_score": 60,
       "service_score": 100,
       "overall_score": 88,
-      "classification": "Acessibilidade parcial",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade parcial"
     },
     {
       "id": "est_creas_central",
@@ -730,9 +974,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 98,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_biblioteca_monteiro_lobato",
@@ -818,9 +1060,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 100,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_terminal_acessivel",
@@ -911,9 +1151,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 85,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_cras_bastos",
@@ -1000,9 +1238,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 89,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_hospital_bastos",
@@ -1092,9 +1328,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 90,
-      "classification": "Acessibilidade limitada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade limitada"
     },
     {
       "id": "est_supermercado_kawakami_bastos",
@@ -1184,9 +1418,7 @@
       "auditory_score": 60,
       "service_score": 100,
       "overall_score": 63,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_recinto_bastos",
@@ -1276,9 +1508,7 @@
       "auditory_score": 0,
       "service_score": 100,
       "overall_score": 53,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_farmacia_total_bastos",
@@ -1368,9 +1598,7 @@
       "auditory_score": 20,
       "service_score": 100,
       "overall_score": 54,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_poupatempo_tupa",
@@ -1456,9 +1684,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 94,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_santacasa_tupa",
@@ -1546,9 +1772,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 92,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_rodoviaria_tupa",
@@ -1639,9 +1863,7 @@
       "auditory_score": 0,
       "service_score": 100,
       "overall_score": 67,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_fatec_pompeia",
@@ -1727,9 +1949,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 100,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_santacasa_pompeia",
@@ -1819,9 +2039,7 @@
       "auditory_score": 60,
       "service_score": 100,
       "overall_score": 82,
-      "classification": "Acessibilidade limitada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade limitada"
     },
     {
       "id": "est_cras_pompeia",
@@ -1906,9 +2124,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 89,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_hcfamema_marilia",
@@ -1996,9 +2212,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 96,
-      "classification": "Acessibilidade limitada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade limitada"
     },
     {
       "id": "est_poupatempo_marilia",
@@ -2084,9 +2298,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 96,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_apae_marilia",
@@ -2172,9 +2384,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 100,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_terminal_urbano_marilia",
@@ -2263,9 +2473,7 @@
       "auditory_score": 40,
       "service_score": 100,
       "overall_score": 68,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_marilia_shopping",
@@ -2352,9 +2560,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 88,
-      "classification": "Acessibilidade limitada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade limitada"
     },
     {
       "id": "est_bosque_marilia",
@@ -2444,9 +2650,7 @@
       "auditory_score": 0,
       "service_score": 100,
       "overall_score": 61,
-      "classification": "Acessibilidade insuficiente",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade insuficiente"
     },
     {
       "id": "est_cras_marilia",
@@ -2531,9 +2735,7 @@
       "auditory_score": 80,
       "service_score": 100,
       "overall_score": 89,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_creas_marilia",
@@ -2618,9 +2820,7 @@
       "auditory_score": 100,
       "service_score": 100,
       "overall_score": 92,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_fadap_tupa",
@@ -2706,9 +2906,7 @@
       "auditory_score": 90,
       "service_score": 95,
       "overall_score": 92,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_cras1_tupa",
@@ -2795,9 +2993,7 @@
       "auditory_score": 74,
       "service_score": 96,
       "overall_score": 88,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_cras2_tupa",
@@ -2884,9 +3080,7 @@
       "auditory_score": 76,
       "service_score": 94,
       "overall_score": 85,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_cras3_tupa",
@@ -2973,9 +3167,7 @@
       "auditory_score": 72,
       "service_score": 92,
       "overall_score": 82,
-      "classification": "Acessibilidade parcial",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade parcial"
     },
     {
       "id": "est_creas_tupa",
@@ -3060,9 +3252,7 @@
       "auditory_score": 88,
       "service_score": 98,
       "overall_score": 93,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_sec_assistencia_tupa",
@@ -3147,9 +3337,7 @@
       "auditory_score": 86,
       "service_score": 96,
       "overall_score": 91,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_apae_tupa",
@@ -3234,9 +3422,7 @@
       "auditory_score": 95,
       "service_score": 100,
       "overall_score": 98,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_upa_tupa",
@@ -3323,9 +3509,7 @@
       "auditory_score": 82,
       "service_score": 90,
       "overall_score": 86,
-      "classification": "Acessibilidade bem avaliada",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade bem avaliada"
     },
     {
       "id": "est_praca_bandeira_tupa",
@@ -3412,9 +3596,7 @@
       "auditory_score": 78,
       "service_score": 88,
       "overall_score": 84,
-      "classification": "Acessibilidade parcial",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade parcial"
     },
     {
       "id": "est_tamoios_tupa",
@@ -3501,9 +3683,7 @@
       "auditory_score": 80,
       "service_score": 88,
       "overall_score": 84,
-      "classification": "Acessibilidade parcial",
-      "distance_km": null,
-      "personal_compatibility_score": null
+      "classification": "Acessibilidade parcial"
     }
   ],
   "reviews": [
@@ -3560,118 +3740,6 @@
   ],
   "ai_analyses": [
     {
-      "id": "ai_318804df-8f2",
-      "establishment_id": null,
-      "image_url": "/uploads/ai_1795116828341_834764.jpg",
-      "category_analyzed": "entrada",
-      "identified_items": [
-        "Imagem validada (3024x4032px • 1459 KB) — Luminosidade: 54% | Contraste: 56%",
-        "Área de aproximação frontal e vão de entrada analisados",
-        "Estrutura de acesso principal identificada",
-        "Iluminação equilibrada (54%), sem ofuscamento crítico (4%)",
-        "Bom contraste visual na fotografia (56%)"
-      ],
-      "potential_barriers": [
-        "Indício de possível ressalto na soleira (requer medição presencial < 5mm)",
-        "Confirmar faixa sinalizadora de contraste em portas de vidro"
-      ],
-      "affected_audience": [
-        "Cadeirantes",
-        "Pessoas com baixa visão",
-        "Mobilidade reduzida"
-      ],
-      "recommended_improvements": [
-        "Manter soleira nivelada (< 5mm NBR 9050) e vão livre >= 80cm",
-        "Aplicar fita de alto contraste em portas envidraçadas"
-      ],
-      "confidence_score": 88,
-      "confidence_label": "Alta confiança",
-      "disclaimer": "Análise óptica do AcessoReal apresentando INDÍCIOS VISUAIS preliminares (luminosidade, contraste, ofuscamento e diretrizes NBR 9050). Não substitui medição física ou laudo oficial.",
-      "status": "concluido",
-      "created_at": "2026-11-19T19:33:49.670Z"
-    },
-    {
-      "id": "ai_64c2d606-13d",
-      "establishment_id": null,
-      "image_url": "/uploads/ai_1795115833802_9360a1.jpg",
-      "category_analyzed": "rampa",
-      "identified_items": [
-        "Imagem validada (800x533px • 51 KB) — Luminosidade: 62% | Contraste: 48%",
-        "Superfície inclinada de transição / rampa identificada",
-        "Iluminação equilibrada (62%), sem ofuscamento crítico (4%)",
-        "Bom contraste visual na fotografia (48%)"
-      ],
-      "potential_barriers": [
-        "Inclinação exige medição física com inclinômetro (limite NBR 9050: 8,33%)",
-        "Confirmar corrimãos duplos bilaterais (70cm e 92cm)"
-      ],
-      "affected_audience": [
-        "Cadeirantes",
-        "Idosos",
-        "Usuários de muletas ou andadores"
-      ],
-      "recommended_improvements": [
-        "Garantir corrimão duplo em ambos os lados e piso tátil de alerta no início e fim da rampa"
-      ],
-      "confidence_score": 84,
-      "confidence_label": "Média confiança",
-      "disclaimer": "Análise óptica do AcessoReal apresentando INDÍCIOS VISUAIS preliminares (luminosidade, contraste, ofuscamento e diretrizes NBR 9050). Não substitui medição física ou laudo oficial.",
-      "status": "concluido",
-      "created_at": "2026-11-19T19:17:14.500Z"
-    },
-    {
-      "id": "ai_197b8b81-6dd",
-      "establishment_id": null,
-      "image_url": "/uploads/ai_1795115818840_46238b.jpg",
-      "category_analyzed": "rampa",
-      "identified_items": [
-        "Superfície inclinada de transição / rampa identificada"
-      ],
-      "potential_barriers": [
-        "Inclinação exige medição física com inclinômetro (limite NBR 9050: 8,33%)",
-        "Confirmar corrimãos duplos bilaterais (70cm e 92cm)"
-      ],
-      "affected_audience": [
-        "Cadeirantes",
-        "Idosos",
-        "Usuários de muletas ou andadores"
-      ],
-      "recommended_improvements": [
-        "Garantir corrimão duplo em ambos os lados e piso tátil de alerta no início e fim da rampa"
-      ],
-      "confidence_score": 80,
-      "confidence_label": "Média confiança",
-      "disclaimer": "Análise óptica do AcessoReal apresentando INDÍCIOS VISUAIS preliminares (luminosidade, contraste, ofuscamento e diretrizes NBR 9050). Não substitui medição física ou laudo oficial.",
-      "status": "concluido",
-      "created_at": "2026-11-19T19:16:59.442Z"
-    },
-    {
-      "id": "ai_5a38486e-32d",
-      "establishment_id": null,
-      "image_url": "/uploads/ai_1795115709584_719eb6.jpg",
-      "category_analyzed": "rampa",
-      "identified_items": [
-        "Superfície inclinada de transição / rampa identificada"
-      ],
-      "potential_barriers": [
-        "Inclinação exige medição física com inclinômetro (limite NBR 9050: 8,33%)",
-        "Confirmar corrimãos duplos bilaterais (70cm e 92cm)"
-      ],
-      "affected_audience": [
-        "Cadeirantes",
-        "Idosos",
-        "Usuários de muletas ou andadores"
-      ],
-      "recommended_improvements": [
-        "Garantir corrimão duplo em ambos os lados e piso tátil de alerta no início e fim da rampa"
-      ],
-      "confidence_score": 80,
-      "confidence_label": "Média confiança",
-      "disclaimer": "Análise óptica do AcessoReal apresentando INDÍCIOS VISUAIS preliminares (luminosidade, contraste, ofuscamento e diretrizes NBR 9050). Não substitui medição física ou laudo oficial.",
-      "status": "concluido",
-      "created_at": "2026-11-19T19:15:09.997Z"
-    },
-    {
       "id": "ai_1795110383527_k5q19",
       "establishment_id": null,
       "image_url": "/uploads/img_1795110383400_k4pqqr.jpg",
@@ -3705,6 +3773,94 @@
       "disclaimer": "Análise gerada pelo motor de visão computacional óptica do AcessoReal (indícios visuais baseados em luminosidade, contraste, ofuscamento e diretrizes da NBR 9050). Não substitui medição presencial ou laudo técnico.",
       "status": "concluido",
       "created_at": "2026-11-19T17:46:23.527Z"
+    },
+    {
+      "id": "ai_1795109959162_hyqb3",
+      "establishment_id": null,
+      "image_url": "/uploads/img_1795109959151_l44n54.jpg",
+      "category_analyzed": "entrada",
+      "identified_items": [
+        "Vão de porta aparentemente amplo",
+        "Presença de maçaneta tipo alavanca",
+        "Área de aproximação frontal visível"
+      ],
+      "potential_barriers": [
+        "Indício de pequeno desnível/ressalto na soleira da porta",
+        "Porta manual de vidro sem faixa de sinalização visual aparente"
+      ],
+      "affected_audience": [
+        "Pessoas em cadeira de rodas",
+        "Pessoas com baixa visão",
+        "Pessoas com carrinho de bebê ou mobilidade reduzida"
+      ],
+      "recommended_improvements": [
+        "Instalar fita sinalizadora de alto contraste na porta de vidro à altura dos olhos",
+        "Rebaixar ressalto da soleira para nivelamento total (< 5mm conforme NBR 9050)",
+        "Verificar se a força de abertura da porta não excede 23N"
+      ],
+      "confidence_score": 85,
+      "confidence_label": "Média confiança",
+      "disclaimer": "Esta análise é baseada em inteligência artificial e visão computacional apresentando INDÍCIOS VISUAIS preliminares. Não constitui medição física, laudo técnico de engenharia ou certificação oficial da NBR 9050.",
+      "status": "concluido",
+      "created_at": "2026-11-19T17:39:19.162Z"
+    },
+    {
+      "id": "ai_1795041460440_94urv",
+      "establishment_id": null,
+      "image_url": "/uploads/img_1795041460435_mpawu4.jpg",
+      "category_analyzed": "rampa",
+      "identified_items": [
+        "Rampa de acesso construída em alvenaria/concreto",
+        "Piso aparentemente uniforme",
+        "Guarda-corpo lateral presente em um dos lados"
+      ],
+      "potential_barriers": [
+        "Indício de inclinação que pode ser superior ao recomendado (requer medição in loco com inclinômetro)",
+        "Ausência aparente de corrimão duplo em ambos os lados"
+      ],
+      "affected_audience": [
+        "Cadeirantes",
+        "Pessoas idosas ou com dificuldade de marcha",
+        "Usuários de muletas ou andadores"
+      ],
+      "recommended_improvements": [
+        "Instalar corrimão duplo em ambos os lados (alturas de 70cm e 92cm)",
+        "Medir a inclinação longitudinal da rampa para assegurar conformidade com a NBR 9050 (ideal até 8.33%)",
+        "Adicionar piso tátil de alerta no início e término da rampa"
+      ],
+      "confidence_score": 78,
+      "confidence_label": "Indício preliminar (requer validação presencial)",
+      "disclaimer": "Esta análise é baseada em inteligência artificial e visão computacional apresentando INDÍCIOS VISUAIS preliminares. Não constitui medição física, laudo técnico de engenharia ou certificação oficial da NBR 9050.",
+      "status": "concluido",
+      "created_at": "2026-11-18T22:37:40.440Z"
+    },
+    {
+      "id": "ai_seed_1",
+      "establishment_id": "est_supermercado_central",
+      "image_url": "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80",
+      "category_analyzed": "entrada",
+      "identified_items": [
+        "Rampa de acesso frontal com piso antiderrapante",
+        "Portas automáticas de correr de vidro temperado",
+        "Luminária de teto uniforme"
+      ],
+      "potential_barriers": [
+        "Fita de contraste visual na porta de vidro parece ausente ou de baixo contraste",
+        "Guia lateral de proteção da rampa de baixa altura"
+      ],
+      "affected_audience": [
+        "Pessoas com baixa visão",
+        "Usuários de cadeira de rodas motorizada"
+      ],
+      "recommended_improvements": [
+        "Aplicar faixa fotoluminescente ou adesivo de alto contraste na porta de vidro",
+        "Instalar guia de balizamento de 5cm na lateral da rampa"
+      ],
+      "confidence_score": 86,
+      "confidence_label": "Alta confiança",
+      "disclaimer": "Esta análise é baseada em visão computacional e inteligência artificial e representa INDÍCIOS VISUAIS preliminares. Não constitui laudo técnico ou certificação da NBR 9050.",
+      "status": "concluido",
+      "created_at": "2026-11-15T09:20:00Z"
     }
   ],
   "reports": []

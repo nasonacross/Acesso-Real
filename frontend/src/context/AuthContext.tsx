@@ -1,21 +1,31 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User, UserProfile } from '../types';
-import { fetchProfile, saveProfile as apiSaveProfile } from '../api';
+import { fetchProfile, saveProfile as apiSaveProfile, registerUserApi, loginUserApi } from '../api';
 
 interface AuthContextType {
   user: User;
   profile: UserProfile | null;
+  isRegisteredUser: boolean;
   loading: boolean;
   setUser: (u: User) => void;
+  registerAccount: (payload: {
+    name: string;
+    email: string;
+    password: string;
+    role?: 'visitor' | 'owner';
+    profileData?: Partial<UserProfile>;
+  }) => Promise<void>;
+  loginAccount: (email: string, password: string) => Promise<void>;
+  logoutAccount: () => void;
   updateProfile: (updates: Partial<UserProfile>) => Promise<UserProfile>;
-  switchUserRole: (role: 'visitor' | 'owner' | 'admin') => void;
+  switchUserRole: (role: 'visitor' | 'owner') => void;
   updateAccompanimentStatus: (status: 'alone' | 'accompanied' | 'undecided') => Promise<void>;
 }
 
-const defaultUser: User = {
+const guestUser: User = {
   id: 'usr_visitante',
-  name: 'Mariana Silva',
-  email: 'mariana@exemplo.com.br',
+  name: 'Perfil Personalizado',
+  email: '',
   role: 'visitor',
 };
 
@@ -24,7 +34,16 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User>(() => {
     const saved = localStorage.getItem('acesso_user');
-    return saved ? JSON.parse(saved) : defaultUser;
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (parsed.role === 'admin') return guestUser;
+      return parsed;
+    }
+    return guestUser;
+  });
+
+  const [isRegisteredUser, setIsRegisteredUser] = useState<boolean>(() => {
+    return localStorage.getItem('acesso_is_registered') === 'true';
   });
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -45,6 +64,37 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } finally {
       setLoading(false);
     }
+  };
+
+  const registerAccount = async (payload: {
+    name: string;
+    email: string;
+    password: string;
+    role?: 'visitor' | 'owner';
+    profileData?: Partial<UserProfile>;
+  }) => {
+    const { user: createdUser, profile: createdProfile } = await registerUserApi(payload);
+    localStorage.setItem('acesso_is_registered', 'true');
+    localStorage.setItem('acesso_user', JSON.stringify(createdUser));
+    setIsRegisteredUser(true);
+    setUser(createdUser);
+    setProfile(createdProfile);
+  };
+
+  const loginAccount = async (email: string, password: string) => {
+    const { user: loggedUser, profile: loadedProfile } = await loginUserApi({ email, password });
+    localStorage.setItem('acesso_is_registered', 'true');
+    localStorage.setItem('acesso_user', JSON.stringify(loggedUser));
+    setIsRegisteredUser(true);
+    setUser(loggedUser);
+    setProfile(loadedProfile);
+  };
+
+  const logoutAccount = () => {
+    localStorage.setItem('acesso_is_registered', 'false');
+    localStorage.setItem('acesso_user', JSON.stringify(guestUser));
+    setIsRegisteredUser(false);
+    setUser(guestUser);
   };
 
   const updateProfile = async (updates: Partial<UserProfile>): Promise<UserProfile> => {
@@ -68,23 +118,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     await updateProfile({ accompaniment: updatedAcc });
   };
 
-  const switchUserRole = (role: 'visitor' | 'owner' | 'admin') => {
-    if (role === 'admin') {
-      setUser({
-        id: 'usr_admin',
-        name: 'Administradora AcessoReal',
-        email: 'admin@acessoreal.org',
-        role: 'admin',
-      });
-    } else if (role === 'owner') {
+  const switchUserRole = (role: 'visitor' | 'owner') => {
+    if (role === 'owner') {
       setUser({
         id: 'usr_gestor',
-        name: 'Carlos Oliveira (Gestor Comercial)',
-        email: 'gestor@supermercadocentral.com.br',
+        name: 'Perfil Gestor',
+        email: 'gestor@acessoreal.org',
         role: 'owner',
       });
     } else {
-      setUser(defaultUser);
+      const savedRegistered = localStorage.getItem('acesso_is_registered') === 'true';
+      if (savedRegistered) {
+        const savedUser = localStorage.getItem('acesso_user');
+        if (savedUser) {
+          const parsed = JSON.parse(savedUser);
+          if (parsed.role === 'visitor') {
+            setUser(parsed);
+            return;
+          }
+        }
+      }
+      setUser(guestUser);
     }
   };
 
@@ -93,8 +147,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
         user,
         profile,
+        isRegisteredUser,
         loading,
         setUser,
+        registerAccount,
+        loginAccount,
+        logoutAccount,
         updateProfile,
         switchUserRole,
         updateAccompanimentStatus,

@@ -25,6 +25,9 @@ export interface IntellectualNeeds {
   spatial_orientation_difficulty: boolean;
   needs_simple_instructions: boolean;
   needs_assistance_tasks: boolean;
+  dyslexia?: boolean;
+  memory_dementia?: boolean;
+  prefers_written_communication?: boolean;
 }
 
 export interface SensoryNeeds {
@@ -36,6 +39,15 @@ export interface SensoryNeeds {
   light_sensitivity: boolean;
   crowded_spaces_difficulty: boolean;
   needs_quiet_spaces: boolean;
+  anxiety_disorder?: boolean;
+  panic_disorder?: boolean;
+  depression?: boolean;
+  bipolar_disorder?: boolean;
+  ocd?: boolean;
+  ptsd?: boolean;
+  tourette?: boolean;
+  psychosocial_condition?: boolean;
+  smell_sensitivity?: boolean;
 }
 
 export interface VisualNeeds {

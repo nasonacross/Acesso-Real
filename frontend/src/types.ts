@@ -23,6 +23,9 @@ export interface IntellectualNeeds {
   spatial_orientation_difficulty: boolean;
   needs_simple_instructions: boolean;
   needs_assistance_tasks: boolean;
+  dyslexia?: boolean;
+  memory_dementia?: boolean;
+  prefers_written_communication?: boolean;
 }
 
 export interface SensoryNeeds {
@@ -34,6 +37,15 @@ export interface SensoryNeeds {
   light_sensitivity: boolean;
   crowded_spaces_difficulty: boolean;
   needs_quiet_spaces: boolean;
+  anxiety_disorder?: boolean;
+  panic_disorder?: boolean;
+  depression?: boolean;
+  bipolar_disorder?: boolean;
+  ocd?: boolean;
+  ptsd?: boolean;
+  tourette?: boolean;
+  psychosocial_condition?: boolean;
+  smell_sensitivity?: boolean;
 }
 
 export interface VisualNeeds {
@@ -291,4 +303,47 @@ export interface VisitSimulationResult {
     key_phone_questions: string[];
   };
   generated_at: string;
+}
+
+export interface RouteStep {
+  step_number: number;
+  title: string;
+  instruction: string;
+  distance_meters: number;
+  duration_seconds: number;
+  accessibility_feature: string;
+  status: 'confirmado' | 'atencao' | 'informativo';
+  icon: 'straight' | 'right' | 'left' | 'crossing' | 'destination' | 'elevator' | 'ramp' | 'bus' | 'car';
+  alert?: string | null;
+  lat: number;
+  lng: number;
+}
+
+export interface AccessibleRouteResult {
+  origin_name: string;
+  origin_coords: [number, number];
+  destination_name: string;
+  destination_coords: [number, number];
+  destination_establishment_id?: string;
+  transport_mode?: 'pe' | 'onibus' | 'carro';
+  transport_mode_text?: string;
+  total_distance_meters: number;
+  total_distance_text: string;
+  total_duration_minutes: number;
+  total_duration_text: string;
+  overall_accessibility_score: number;
+  level_paving_percentage: number;
+  tactile_paving_percentage: number;
+  sensory_calm_score: number;
+  route_type: 'nivelada' | 'curta' | 'sensorial';
+  coordinates: [number, number][];
+  steps: RouteStep[];
+  critical_warnings: string[];
+  establishment_summary?: {
+    name: string;
+    category: string;
+    classification: string;
+    overall_score: number;
+    image?: string;
+  };
 }

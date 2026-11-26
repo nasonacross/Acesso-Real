@@ -1,13 +1,46 @@
 import {
+  User,
   Establishment,
   UserProfile,
   PersonalCompatibilityResult,
   VisitSimulationResult,
   Review,
-  AIAnalysis
+  AIAnalysis,
+  AccessibleRouteResult
 } from './types';
 
 const BASE_URL = '/api';
+
+export async function registerUserApi(payload: {
+  name: string;
+  email: string;
+  password: string;
+  role?: 'visitor' | 'owner';
+  profileData?: Partial<UserProfile>;
+}): Promise<{ user: User; profile: UserProfile }> {
+  const res = await fetch(`${BASE_URL}/auth/register`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Falha ao realizar cadastro');
+  return data;
+}
+
+export async function loginUserApi(payload: {
+  email: string;
+  password: string;
+}): Promise<{ user: User; profile: UserProfile }> {
+  const res = await fetch(`${BASE_URL}/auth/login`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'E-mail ou senha inválidos');
+  return data;
+}
 
 export async function fetchEstablishments(params?: {
   q?: string;
@@ -150,6 +183,12 @@ export async function analyzeImageAI(
   return res.json();
 }
 
+export async function fetchAiHistory(): Promise<AIAnalysis[]> {
+  const res = await fetch(`${BASE_URL}/ai/history`);
+  if (!res.ok) throw new Error('Falha ao carregar histórico de IA');
+  return res.json();
+}
+
 export async function fetchAdminDashboard(): Promise<any> {
   const res = await fetch(`${BASE_URL}/admin/dashboard`);
   if (!res.ok) throw new Error('Falha ao carregar dados administrativos');
@@ -173,5 +212,21 @@ export async function updateReportStatusAdmin(id: string, status: string): Promi
     body: JSON.stringify({ status }),
   });
   if (!res.ok) throw new Error('Falha ao atualizar denúncia');
+  return res.json();
+}
+
+export async function calculateAccessibleRouteApi(payload: {
+  origin: { lat: number; lng: number; name: string };
+  destination: { lat: number; lng: number; name: string; establishmentId?: string };
+  profile?: string;
+  routePreference?: string;
+  transportMode?: string;
+}): Promise<AccessibleRouteResult> {
+  const res = await fetch(`${BASE_URL}/routes/calculate`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!res.ok) throw new Error('Falha ao calcular rota acessível');
   return res.json();
 }

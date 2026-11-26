@@ -23,9 +23,7 @@ const newEstablishments = [
     lng: -50.7325,
     phone: '(14) 3478-2210',
     website: 'https://bastos.sp.gov.br/cras',
-    images: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_cras_bastos_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -105,9 +103,7 @@ const newEstablishments = [
     lng: -50.7342,
     phone: '(14) 3478-1211',
     website: 'https://hospitalbastos.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/saude_sp_facade.jpg', '/images/establishments/est_hospital_bastos_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -189,9 +185,7 @@ const newEstablishments = [
     lng: -50.7350,
     phone: '(14) 3478-4500',
     website: 'https://kawakami.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_supermercado_kawakami_bastos_sat.jpg'],
     provenance: 'usuario' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -274,9 +268,7 @@ const newEstablishments = [
     lng: -50.7310,
     phone: '(14) 3478-1440',
     website: 'https://bastos.sp.gov.br/turismo',
-    images: [
-      'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_recinto_bastos_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -359,9 +351,7 @@ const newEstablishments = [
     lng: -50.7338,
     phone: '(14) 3478-2100',
     website: 'https://drogariatotal.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_farmacia_total_bastos_sat.jpg'],
     provenance: 'ia' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -446,9 +436,7 @@ const newEstablishments = [
     lng: -50.5142,
     phone: '(14) 3404-1000',
     website: 'https://poupatempo.sp.gov.br',
-    images: [
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_poupatempo.jpg', '/images/establishments/est_poupatempo_tupa_sat.jpg'],
     provenance: 'documentada' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -528,9 +516,7 @@ const newEstablishments = [
     lng: -50.5165,
     phone: '(14) 3404-2200',
     website: 'https://santacasatupa.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1586773860418-d37222d8fce3?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/saude_sp_facade.jpg', '/images/establishments/est_santacasa_tupa_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -610,9 +596,7 @@ const newEstablishments = [
     lng: -50.5110,
     phone: '(14) 3496-1550',
     website: 'https://tupa.sp.gov.br/rodoviaria',
-    images: [
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_rodoviaria_bastos.jpg', '/images/establishments/est_rodoviaria_tupa_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -697,9 +681,7 @@ const newEstablishments = [
     lng: -50.1750,
     phone: '(14) 3405-1800',
     website: 'https://fatecpompeia.edu.br',
-    images: [
-      'https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/fatec_facade.jpg', '/images/establishments/est_fatec_pompeia_sat.jpg'],
     provenance: 'documentada' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -779,9 +761,7 @@ const newEstablishments = [
     lng: -50.1710,
     phone: '(14) 3452-1144',
     website: 'https://santacasapompeia.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/saude_sp_facade.jpg', '/images/establishments/est_santacasa_pompeia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -863,9 +843,7 @@ const newEstablishments = [
     lng: -50.1690,
     phone: '(14) 3452-2550',
     website: 'https://pompeia.sp.gov.br/cras',
-    images: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_cras_pompeia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -947,9 +925,7 @@ const newEstablishments = [
     lng: -49.9610,
     phone: '(14) 3402-1744',
     website: 'https://hcfamema.sp.gov.br',
-    images: [
-      'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/marilia_hcfamema.jpg', '/images/establishments/est_hcfamema_marilia_sat.jpg'],
     provenance: 'documentada' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -1031,9 +1007,7 @@ const newEstablishments = [
     lng: -49.9480,
     phone: '(14) 3402-8800',
     website: 'https://poupatempo.sp.gov.br',
-    images: [
-      'https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/poupatempo_facade.jpg', '/images/establishments/est_poupatempo_marilia_sat.jpg'],
     provenance: 'documentada' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -1113,9 +1087,7 @@ const newEstablishments = [
     lng: -49.9390,
     phone: '(14) 3402-1400',
     website: 'https://apaemarilia.org.br',
-    images: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_apae.jpg', '/images/establishments/est_apae_marilia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -1195,9 +1167,7 @@ const newEstablishments = [
     lng: -49.9500,
     phone: '(14) 3402-1000',
     website: 'https://marilia.sp.gov.br/transporte',
-    images: [
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_rodoviaria_bastos.jpg', '/images/establishments/est_terminal_urbano_marilia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -1280,9 +1250,7 @@ const newEstablishments = [
     lng: -49.9410,
     phone: '(14) 3401-1500',
     website: 'https://mariliashopping.com.br',
-    images: [
-      'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_marilia_shopping_sat.jpg'],
     provenance: 'declarada' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -1364,9 +1332,7 @@ const newEstablishments = [
     lng: -49.9320,
     phone: '(14) 3401-2000',
     website: 'https://marilia.sp.gov.br/bosque',
-    images: [
-      'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_bosque_marilia.jpg', '/images/establishments/est_bosque_marilia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'parcial' as const,
@@ -1448,9 +1414,7 @@ const newEstablishments = [
     lng: -49.9720,
     phone: '(14) 3417-7090',
     website: 'https://marilia.sp.gov.br/cras',
-    images: [
-      'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_cras_marilia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,
@@ -1530,9 +1494,7 @@ const newEstablishments = [
     lng: -49.9530,
     phone: '(14) 3413-5870',
     website: 'https://marilia.sp.gov.br/creas',
-    images: [
-      'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80'
-    ],
+    images: ['/images/establishments/est_creas_marilia_sat.jpg'],
     provenance: 'presencial' as const,
     is_demo: false,
     verified_status: 'verificado' as const,

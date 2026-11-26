@@ -73,19 +73,19 @@ export const AdminPage: React.FC = () => {
   const { kpis, recent_reviews, recent_reports, recent_ai } = dashboard;
 
   return (
-    <div className="max-w-6xl mx-auto space-y-8 pb-16">
+    <div className="max-w-6xl mx-auto space-y-8 pb-16 animate-fade-in">
       {/* Title */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-3">
-        <div className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-700 bg-rose-50 px-3 py-1 rounded-full uppercase tracking-wider">
+      <div className="mesh-hero text-white p-6 sm:p-8 rounded-[2rem] shadow-elevated border border-white/10 space-y-3">
+        <div className="inline-flex items-center gap-1.5 text-xs font-bold text-rose-300 bg-white/10 border border-white/15 px-3 py-1 rounded-full uppercase tracking-wider">
           <ShieldAlert size={15} />
           <span>Painel de Governança & Moderação</span>
         </div>
 
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
           Painel de Controle AcessoReal
         </h1>
 
-        <p className="text-xs sm:text-sm text-slate-600 max-w-2xl">
+        <p className="text-xs sm:text-sm text-slate-300 max-w-2xl">
           Supervisão em tempo real de estabelecimentos, fila de moderação colaborativa, relatórios de barreiras e auditoria de inteligência artificial.
         </p>
 

@@ -76,148 +76,143 @@ export const Navbar: React.FC<Props> = ({ activeTab, setActiveTab }) => {
 
   const navItems = [
     { id: 'home', label: 'Início', icon: Compass },
-    { id: 'map', label: 'Mapa Interativo', icon: MapPin },
-    { id: 'establishments', label: 'Estabelecimentos', icon: Search },
-    { id: 'profile', label: 'Meu Perfil', icon: User },
-    { id: 'route', label: 'Rota Acessível', icon: Navigation },
-    { id: 'ai', label: 'Análise por IA', icon: Sparkles },
-    { id: 'owner', label: 'Área do Estabelecimento', icon: Building2 },
-    { id: 'admin', label: 'Painel Admin', icon: ShieldAlert },
-    { id: 'about', label: 'Metodologia', icon: Info },
+    { id: 'map', label: 'Mapa', icon: MapPin },
+    { id: 'route', label: 'Rotas Tupã', icon: Navigation },
+    { id: 'establishments', label: 'Locais', icon: Search },
+    { id: 'profile', label: 'Perfil', icon: User },
+    { id: 'ai', label: 'IA Visão', icon: Sparkles },
+    { id: 'owner', label: 'Gestor', icon: Building2 },
+    { id: 'admin', label: 'Admin', icon: ShieldAlert },
+    { id: 'about', label: 'Sobre', icon: Info },
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <header className="sticky top-0 z-40 bg-white/85 backdrop-blur-xl border-b border-slate-200/70 shadow-sm">
       {/* Universal Accessibility Toolbar */}
-      <div className="bg-slate-900 text-white text-xs px-3 sm:px-6 py-1.5 flex flex-wrap items-center justify-between gap-2 border-b border-slate-800">
-        <div className="flex items-center gap-2">
-          <span className="font-semibold text-slate-300 hidden sm:inline">Acessibilidade do Site:</span>
+      <div className="bg-slate-950 text-white text-[11px] px-3 sm:px-6 py-1.5 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
+          <span className="font-semibold text-slate-400 hidden md:inline">Acessibilidade:</span>
 
-          {/* High Contrast */}
           <button
             onClick={toggleHighContrast}
-            className={`inline-flex items-center gap-1 px-2 py-0.5 rounded font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold transition-colors ${
               highContrast
                 ? 'bg-yellow-400 text-black'
-                : 'bg-slate-800 hover:bg-slate-700 text-white'
+                : 'bg-white/10 hover:bg-white/20 text-slate-100'
             }`}
             aria-label="Alternar modo de alto contraste"
           >
-            <SunMoon size={13} />
+            <SunMoon size={12} />
             <span>{highContrast ? 'Contraste Normal' : 'Alto Contraste'}</span>
           </button>
 
-          {/* Font Controls */}
-          <div className="inline-flex items-center gap-1 bg-slate-800 rounded px-1 py-0.5">
-            <Type size={13} className="text-slate-400 ml-1" />
+          <div className="inline-flex items-center gap-0.5 bg-white/10 rounded-full px-1.5 py-0.5">
+            <Type size={12} className="text-slate-400 mr-0.5" />
             <button
               onClick={decreaseFont}
-              className="px-1.5 py-0.5 hover:bg-slate-700 rounded text-xs font-bold"
+              className="px-1.5 hover:bg-white/15 rounded-full font-bold"
               aria-label="Diminuir tamanho da fonte"
-              title="Diminuir fonte"
             >
               A-
             </button>
             <button
               onClick={resetFont}
-              className="px-1.5 py-0.5 hover:bg-slate-700 rounded text-xs"
+              className="px-1.5 hover:bg-white/15 rounded-full text-[10px] font-semibold text-slate-300"
               aria-label="Restaurar tamanho da fonte"
-              title="Tamanho padrão"
             >
               {Math.round(fontScale * 100)}%
             </button>
             <button
               onClick={increaseFont}
-              className="px-1.5 py-0.5 hover:bg-slate-700 rounded text-xs font-bold"
+              className="px-1.5 hover:bg-white/15 rounded-full font-bold"
               aria-label="Aumentar tamanho da fonte"
-              title="Aumentar fonte"
             >
               A+
             </button>
           </div>
 
-          {/* Audio TTS helper */}
           {isSpeaking ? (
             <button
               onClick={stopSpeaking}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-rose-600 text-white font-bold animate-pulse"
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-rose-600 text-white font-bold animate-pulse"
               aria-label="Parar leitura de voz"
             >
-              <VolumeX size={13} />
-              <span>Parar Leitura</span>
+              <VolumeX size={12} />
+              <span>Parar Voz</span>
             </button>
           ) : (
             <button
-              onClick={() => speakText('AcessoReal: Plataforma inteligente de acessibilidade universal e compatibilidade individual.')}
-              className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-white"
-              aria-label="Testar leitor de voz do site"
-              title="Testar leitura em voz alta"
+              onClick={() => speakText('AcessoReal: Plataforma inteligente de acessibilidade universal e compatibilidade individual em Tupã.')}
+              className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-white/10 hover:bg-white/20 text-slate-100"
+              aria-label="Ouvir apresentação da plataforma"
             >
-              <Volume2 size={13} />
-              <span className="hidden md:inline">Ouvir Introdução</span>
+              <Volume2 size={12} />
+              <span className="hidden sm:inline">Leitor de Voz</span>
             </button>
           )}
         </div>
 
-        {/* User Role Switcher & PWA Install */}
         <div className="flex items-center gap-2">
           {!installedPwa && (
             <button
               onClick={handleInstallClick}
-              className="inline-flex items-center gap-1 bg-brand-500 hover:bg-brand-600 text-white font-bold px-2.5 py-0.5 rounded text-xs transition-colors shadow-sm"
+              className="inline-flex items-center gap-1 bg-brand-600 hover:bg-brand-500 text-white font-bold px-3 py-0.5 rounded-full transition-colors"
               aria-label="Instalar aplicativo PWA"
             >
-              <Download size={13} />
+              <Download size={12} />
               <span>Instalar App</span>
             </button>
           )}
 
-          {/* Quick profile / role switcher for testing */}
-          <div className="hidden lg:flex items-center gap-1.5 text-slate-300">
-            <span className="text-slate-400">Perfil:</span>
+          <div className="hidden xl:flex items-center gap-1.5 text-slate-300">
+            <span className="text-slate-500">Perfil:</span>
             <select
-              value={user.role}
-              onChange={(e) => switchUserRole(e.target.value as any)}
-              className="bg-slate-800 text-white text-xs rounded border border-slate-700 px-2 py-0.5 focus:ring-1 focus:ring-brand-400"
-              aria-label="Alternar papel de usuário para teste"
+              value={user.role === 'owner' ? 'owner' : 'visitor'}
+              onChange={(e) => {
+                const role = e.target.value as 'visitor' | 'owner';
+                switchUserRole(role);
+                if (role === 'owner') setActiveTab('owner');
+                else setActiveTab('profile');
+              }}
+              className="bg-white/10 text-white text-[11px] font-semibold rounded-full border border-white/15 px-2.5 py-0.5 focus:ring-1 focus:ring-brand-400"
+              aria-label="Alternar entre Perfil Personalizado e Perfil Gestor"
             >
-              <option value="visitor">Mariana (Visitante PCD)</option>
-              <option value="owner">Carlos (Gestor do Local)</option>
-              <option value="admin">Administrador</option>
+              <option value="visitor" className="text-slate-900">👤 {user.role === 'visitor' ? user.name : 'Perfil Personalizado'}</option>
+              <option value="owner" className="text-slate-900">🏢 Perfil Gestor</option>
             </select>
           </div>
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
+      {/* Main Modern Frosted Navbar */}
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo & Brand */}
+        <div className="flex items-center justify-between h-16 gap-3">
+          {/* Brand Logo */}
           <button
             onClick={() => setActiveTab('home')}
-            className="flex items-center gap-3 text-left focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-lg p-1"
+            className="flex items-center gap-2.5 text-left focus:outline-none focus:ring-2 focus:ring-brand-500 rounded-xl p-1 shrink-0 group"
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 to-accent-600 flex items-center justify-center text-white shadow-md">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="28" height="28">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-brand-600 via-brand-500 to-accent-500 flex items-center justify-center text-white shadow-glow-brand group-hover:scale-105 transition-transform">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="26" height="26">
                 <circle cx="50" cy="28" r="10" fill="#ffffff" />
-                <path d="M42 43 C42 43, 56 41, 64 48 C70 53, 67 60, 67 60" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" />
-                <path d="M50 44 L44 65 L60 65" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="43" cy="69" r="14" fill="none" stroke="#ffffff" stroke-width="6" />
-                <circle cx="75" cy="28" r="4" fill="#facc15" />
+                <path d="M42 43 C42 43, 56 41, 64 48 C70 53, 67 60, 67 60" fill="none" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" />
+                <path d="M50 44 L44 65 L60 65" fill="none" stroke="#ffffff" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="43" cy="69" r="14" fill="none" stroke="#ffffff" strokeWidth="6" />
+                <circle cx="75" cy="28" r="4" fill="#fde047" />
               </svg>
             </div>
             <div>
-              <span className="text-xl font-extrabold text-slate-900 tracking-tight block leading-tight">
-                Acesso<span className="text-accent-600">Real</span>
+              <span className="font-display text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight block leading-none">
+                Acesso<span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-accent-600">Real</span>
               </span>
-              <span className="text-[10px] text-slate-700 font-semibold uppercase tracking-wider block">
-                Acessibilidade Universal
+              <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest block mt-0.5">
+                Tupã & Região
               </span>
             </div>
           </button>
 
-          {/* Desktop Nav Items */}
-          <div className="hidden lg:flex items-center gap-1">
+          {/* Desktop Floating Pill Nav */}
+          <div className="hidden lg:flex items-center gap-1 bg-slate-100/90 p-1 rounded-2xl border border-slate-200/70">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.id;
@@ -225,78 +220,90 @@ export const Navbar: React.FC<Props> = ({ activeTab, setActiveTab }) => {
                 <button
                   key={item.id}
                   onClick={() => setActiveTab(item.id)}
-                  className={`inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
+                  className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 whitespace-nowrap ${
                     isActive
-                      ? 'bg-brand-50 text-brand-700 border-b-2 border-brand-600'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                      ? 'bg-slate-900 text-white shadow-sm'
+                      : 'text-slate-600 hover:text-slate-950 hover:bg-white/80'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >
-                  <Icon size={16} className={isActive ? 'text-brand-600' : 'text-slate-600'} />
+                  <Icon size={14} className={isActive ? 'text-accent-400' : 'text-slate-500'} />
                   <span>{item.label}</span>
                 </button>
               );
             })}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Hamburger */}
           <div className="lg:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-brand-500"
+              className="p-2.5 rounded-xl text-slate-700 bg-slate-100 hover:bg-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-500 transition-colors"
               aria-label="Abrir menu de navegação"
               aria-expanded={mobileMenuOpen}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-3 px-2 border-t border-slate-200 bg-white rounded-b-2xl shadow-xl space-y-1">
-            {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.id;
-              return (
+          <div className="lg:hidden py-3 px-2 border-t border-slate-100 bg-white/95 backdrop-blur-xl rounded-b-3xl shadow-elevated space-y-1 animate-fade-in">
+            <div className="grid grid-cols-2 gap-1.5">
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                const isActive = activeTab === item.id;
+                return (
+                  <button
+                    key={item.id}
+                    onClick={() => {
+                      setActiveTab(item.id);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-left text-xs font-bold transition-all ${
+                      isActive
+                        ? 'bg-slate-900 text-white shadow-sm'
+                        : 'text-slate-700 bg-slate-50 hover:bg-slate-100'
+                    }`}
+                  >
+                    <Icon size={16} className={isActive ? 'text-accent-400' : 'text-slate-500'} />
+                    <span>{item.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="pt-3 mt-2 border-t border-slate-100 px-1">
+              <span className="text-[11px] font-bold text-slate-500 block mb-1.5">Tipo de Perfil:</span>
+              <div className="grid grid-cols-2 gap-2">
                 <button
-                  key={item.id}
                   onClick={() => {
-                    setActiveTab(item.id);
+                    switchUserRole('visitor');
+                    setActiveTab('profile');
                     setMobileMenuOpen(false);
                   }}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left text-sm font-semibold ${
-                    isActive
-                      ? 'bg-brand-50 text-brand-700 font-bold'
-                      : 'text-slate-700 hover:bg-slate-50'
+                  className={`text-xs py-2 px-3 rounded-xl font-bold border transition-all ${
+                    user.role !== 'owner'
+                      ? 'bg-brand-600 text-white border-brand-600'
+                      : 'bg-slate-50 text-slate-700 border-slate-200'
                   }`}
                 >
-                  <Icon size={18} className={isActive ? 'text-brand-600' : 'text-slate-600'} />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-
-            <div className="pt-2 border-t border-slate-100 px-3">
-              <span className="text-xs text-slate-500 block mb-1">Simular Perfil:</span>
-              <div className="grid grid-cols-3 gap-1">
-                <button
-                  onClick={() => switchUserRole('visitor')}
-                  className={`text-xs py-1 px-2 rounded font-medium border ${user.role === 'visitor' ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}`}
-                >
-                  Visitante
+                  👤 Personalizado
                 </button>
                 <button
-                  onClick={() => switchUserRole('owner')}
-                  className={`text-xs py-1 px-2 rounded font-medium border ${user.role === 'owner' ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}`}
+                  onClick={() => {
+                    switchUserRole('owner');
+                    setActiveTab('owner');
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`text-xs py-2 px-3 rounded-xl font-bold border transition-all ${
+                    user.role === 'owner'
+                      ? 'bg-brand-600 text-white border-brand-600'
+                      : 'bg-slate-50 text-slate-700 border-slate-200'
+                  }`}
                 >
-                  Gestor
-                </button>
-                <button
-                  onClick={() => switchUserRole('admin')}
-                  className={`text-xs py-1 px-2 rounded font-medium border ${user.role === 'admin' ? 'bg-brand-600 text-white' : 'bg-slate-100 text-slate-700'}`}
-                >
-                  Admin
+                  🏢 Perfil Gestor
                 </button>
               </div>
             </div>

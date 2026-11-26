@@ -77,9 +77,9 @@ export const SimulationPage: React.FC<Props> = ({ initialEstablishmentId, onNavi
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 pb-16">
+    <div className="max-w-4xl mx-auto space-y-8 pb-16 animate-fade-in">
       {/* Top Banner */}
-      <div className="bg-gradient-to-br from-brand-900 to-slate-900 text-white p-6 sm:p-8 rounded-3xl shadow-lg space-y-4">
+      <div className="mesh-hero text-white p-6 sm:p-8 rounded-[2rem] shadow-elevated border border-white/10 space-y-4">
         <div className="inline-flex items-center gap-1.5 text-xs font-bold text-accent-300 bg-white/10 px-3 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">
           <Compass size={15} />
           <span>Antes de ir, saiba o que esperar</span>

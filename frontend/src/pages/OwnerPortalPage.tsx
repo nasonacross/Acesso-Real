@@ -97,8 +97,7 @@ export const OwnerPortalPage: React.FC = () => {
       const all = await fetchEstablishments();
       setEstablishments(all);
       if (all.length > 0 && !selectedEst) {
-        setSelectedEst(all[0]);
-        setFeatures(all[0].features);
+        handleSelectEst(all[0]);
       }
     } catch (err) {
       console.error(err);
@@ -167,9 +166,9 @@ export const OwnerPortalPage: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto space-y-8 pb-16">
+    <div className="max-w-5xl mx-auto space-y-8 pb-16 animate-fade-in">
       {/* Header */}
-      <div className="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-3">
+      <div className="surface-card p-6 sm:p-8 space-y-3">
         <div className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-700 bg-brand-50 px-3 py-1 rounded-full uppercase tracking-wider">
           <Building2 size={15} />
           <span>Portal do Estabelecimento & Gestor</span>

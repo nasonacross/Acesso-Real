@@ -1,9 +1,8 @@
 -- ====================================================================
--- AcessoReal - Schema do Banco de Dados PostgreSQL / Supabase
--- Plataforma Inteligente de Acessibilidade Universal
+-- AcessoReal — Schema do Banco de Dados PostgreSQL / Supabase
+-- Projeto: acessoreal-db (sa-east-1)
 -- ====================================================================
 
--- Extensões úteis
 create extension if not exists "pgcrypto";
 
 -- 1. TABELA DE USUÁRIOS
@@ -16,7 +15,7 @@ create table if not exists public.users (
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
 
--- 2. TABELA DE PERFIS DE ACESSIBILIDADE
+-- 2. TABELA DE PERFIS PERSONALIZADOS (CONDIÇÕES MENTAIS & CORPORAIS)
 create table if not exists public.profiles (
   user_id text primary key references public.users(id) on delete cascade,
   physical jsonb not null default '{}'::jsonb,
@@ -25,11 +24,11 @@ create table if not exists public.profiles (
   visual jsonb not null default '{}'::jsonb,
   auditory jsonb not null default '{}'::jsonb,
   other jsonb not null default '{}'::jsonb,
-  accompaniment jsonb not null default '{"status": "undecided", "companion_count": 0}'::jsonb,
+  accompaniment jsonb not null default '{"status": "undecided", "companion_count": 1, "helps_mobility": false, "helps_communication": false, "helps_activities": false, "full_time_escort": false}'::jsonb,
   updated_at timestamp with time zone default timezone('utc'::text, now())
 );
 
--- 3. TABELA DE ESTABELECIMENTOS
+-- 3. TABELA DE ESTABELECIMENTOS E ASSISTÊNCIAS SOCIAIS (TUPÃ & REGIÃO)
 create table if not exists public.establishments (
   id text primary key,
   name text not null,
@@ -64,10 +63,10 @@ create table if not exists public.establishments (
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
 
--- Índices de alta performance
 create index if not exists idx_establishments_city on public.establishments (lower(city));
 create index if not exists idx_establishments_category on public.establishments (category);
 create index if not exists idx_establishments_status on public.establishments (verified_status);
+create index if not exists idx_establishments_owner_id on public.establishments (owner_id);
 create index if not exists idx_establishments_features on public.establishments using gin (features);
 
 -- 4. TABELA DE AVALIAÇÕES (REVIEWS)
@@ -90,7 +89,7 @@ create table if not exists public.reviews (
 
 create index if not exists idx_reviews_establishment on public.reviews (establishment_id);
 
--- 5. TABELA DE ANÁLISES POR IA MULTIMODAL
+-- 5. TABELA DE ANÁLISES POR IA VISÃO
 create table if not exists public.ai_analyses (
   id text primary key,
   establishment_id text references public.establishments(id) on delete set null,
@@ -120,8 +119,10 @@ create table if not exists public.reports (
   created_at timestamp with time zone default timezone('utc'::text, now())
 );
 
+create index if not exists idx_reports_establishment_id on public.reports (establishment_id);
+
 -- ====================================================================
--- POLÍTICAS DE SEGURANÇA (Row Level Security - RLS)
+-- ROW LEVEL SECURITY (RLS)
 -- ====================================================================
 alter table public.users enable row level security;
 alter table public.profiles enable row level security;
@@ -130,13 +131,18 @@ alter table public.reviews enable row level security;
 alter table public.ai_analyses enable row level security;
 alter table public.reports enable row level security;
 
--- Políticas de Leitura Pública
+-- Users: acesso restrito ao service_role (backend Vercel)
+drop policy if exists "Acesso restrito ao service_role para usuarios" on public.users;
+create policy "Acesso restrito ao service_role para usuarios"
+  on public.users for all to service_role using (true) with check (true);
+
+-- Leitura pública controlada
 create policy "Permitir leitura pública de estabelecimentos" on public.establishments for select using (true);
 create policy "Permitir leitura pública de avaliações aprovadas" on public.reviews for select using (status = 'aprovada');
 create policy "Permitir leitura pública de análises IA" on public.ai_analyses for select using (true);
 create policy "Permitir leitura de perfis pelo próprio usuário" on public.profiles for select using (true);
 
--- Políticas de Inserção e Atualização
+-- Inserção e atualização
 create policy "Permitir inserção de avaliações" on public.reviews for insert with check (true);
 create policy "Permitir inserção de denúncias" on public.reports for insert with check (true);
 create policy "Permitir inserção de análises IA" on public.ai_analyses for insert with check (true);
@@ -144,8 +150,3 @@ create policy "Permitir cadastro de estabelecimentos" on public.establishments f
 create policy "Permitir atualização de estabelecimentos" on public.establishments for update using (true);
 create policy "Permitir atualização de perfis" on public.profiles for insert with check (true);
 create policy "Permitir update de perfis" on public.profiles for update using (true);
-
--- Permissões gerais para anon e authenticated
-grant usage on schema public to anon, authenticated;
-grant all on all tables in schema public to anon, authenticated;
-grant all on all sequences in schema public to anon, authenticated;

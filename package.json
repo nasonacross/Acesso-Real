@@ -1,9 +1,9 @@
 {
   "name": "acessoreal-platform",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "type": "module",
   "private": true,
-  "description": "Plataforma Inteligente de Acessibilidade Universal e Compatibilidade Pessoal",
+  "description": "AcessoReal — Plataforma Inteligente de Acessibilidade Universal, Rotas em Tupã (FADAP) e Compatibilidade Pessoal",
   "scripts": {
     "start": "npm --prefix backend start",
     "dev": "npm --prefix frontend run dev",
@@ -15,14 +15,17 @@
   },
   "keywords": [
     "acessibilidade",
+    "tupa",
+    "fadap",
     "pwa",
     "inclusao",
     "nbr9050",
     "pcd",
     "neurodiversidade",
-    "inteligencia-artificial",
+    "supabase",
+    "vercel",
     "visao-computacional"
   ],
-  "author": "AcessoReal",
+  "author": "nasonacross / AcessoReal",
   "license": "MIT"
 }
